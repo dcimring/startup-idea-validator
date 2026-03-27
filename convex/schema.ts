@@ -17,4 +17,9 @@ export default defineSchema({
     dislikeFeedback: v.string(),
     comments: v.string(),
   }),
+  generalFeedback: defineTable({
+    expertName: v.string(),
+    generalFeedback: v.string(),
+    relatedIdeas: v.string(),
+  }),
 });

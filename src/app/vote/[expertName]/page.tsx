@@ -7,7 +7,7 @@ import { api } from "../../../../convex/_generated/api";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThumbsUp, ThumbsDown, CheckCircle, ArrowRight, Loader2 } from "lucide-react";
 
-type Phase = "intro" | "review" | "feedback" | "closing";
+type Phase = "intro" | "review" | "feedback" | "recommendations" | "closing";
 
 export default function ExpertVotePage() {
   const { expertName } = useParams();
@@ -15,6 +15,7 @@ export default function ExpertVotePage() {
   
   const ideas = useQuery(api.ideas.listActive);
   const submitFeedback = useMutation(api.feedback.submit);
+  const submitGeneralFeedback = useMutation(api.feedback.submitGeneral);
 
   const [phase, setPhase] = useState<Phase>("intro");
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -24,6 +25,10 @@ export default function ExpertVotePage() {
   const [likeFeedback, setLikeFeedback] = useState("");
   const [dislikeFeedback, setDislikeFeedback] = useState("");
   const [comments, setComments] = useState("");
+
+  // General recommendations state
+  const [generalFeedback, setGeneralFeedback] = useState("");
+  const [relatedIdeas, setRelatedIdeas] = useState("");
 
   if (!ideas) {
     return (
@@ -42,7 +47,7 @@ export default function ExpertVotePage() {
     setPhase("feedback");
   };
 
-  const handleSubmit = async () => {
+  const handleSubmitReview = async () => {
     if (currentIdea && currentVote !== null) {
       await submitFeedback({
         ideaId: currentIdea._id,
@@ -53,7 +58,7 @@ export default function ExpertVotePage() {
         comments,
       });
 
-      // Reset form
+      // Reset review form
       setLikeFeedback("");
       setDislikeFeedback("");
       setComments("");
@@ -63,9 +68,18 @@ export default function ExpertVotePage() {
         setCurrentIndex(currentIndex + 1);
         setPhase("review");
       } else {
-        setPhase("closing");
+        setPhase("recommendations");
       }
     }
+  };
+
+  const handleSubmitRecommendations = async () => {
+    await submitGeneralFeedback({
+      expertName: decodedExpertName,
+      generalFeedback,
+      relatedIdeas,
+    });
+    setPhase("closing");
   };
 
   const containerVariants = {
@@ -189,7 +203,7 @@ export default function ExpertVotePage() {
                   <textarea
                     value={likeFeedback}
                     onChange={(e) => setLikeFeedback(e.target.value)}
-                    className="w-full bg-surface-container-low border border-white/10 rounded-xl p-4 focus:border-primary-glow outline-none transition-colors h-24 text-sm"
+                    className="w-full bg-surface-container-low border border-white/10 rounded-xl p-4 focus:border-primary-glow outline-none transition-colors h-24 text-sm resize-none"
                     placeholder="Identify strengths..."
                   />
                 </div>
@@ -198,7 +212,7 @@ export default function ExpertVotePage() {
                   <textarea
                     value={dislikeFeedback}
                     onChange={(e) => setDislikeFeedback(e.target.value)}
-                    className="w-full bg-surface-container-low border border-white/10 rounded-xl p-4 focus:border-primary-glow outline-none transition-colors h-24 text-sm"
+                    className="w-full bg-surface-container-low border border-white/10 rounded-xl p-4 focus:border-primary-glow outline-none transition-colors h-24 text-sm resize-none"
                     placeholder="Highlight risks..."
                   />
                 </div>
@@ -207,16 +221,64 @@ export default function ExpertVotePage() {
                   <textarea
                     value={comments}
                     onChange={(e) => setComments(e.target.value)}
-                    className="w-full bg-surface-container-low border border-white/10 rounded-xl p-4 focus:border-primary-glow outline-none transition-colors h-24 text-sm"
+                    className="w-full bg-surface-container-low border border-white/10 rounded-xl p-4 focus:border-primary-glow outline-none transition-colors h-24 text-sm resize-none"
                     placeholder="Final thoughts..."
                   />
                 </div>
 
                 <button
-                  onClick={handleSubmit}
+                  onClick={handleSubmitReview}
                   className="w-full bg-primary-glow text-surface font-extrabold py-4 rounded-xl cyan-glow hover:brightness-110 transition-all flex items-center justify-center gap-2"
                 >
                   Submit Review <ArrowRight size={20} />
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {phase === "recommendations" && (
+          <motion.div
+            key="recommendations"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="w-full max-w-xl"
+          >
+            <div className="glass p-8 md:p-12 rounded-3xl border-white/10">
+              <h2 className="text-3xl font-extrabold mb-2">
+                Strategic <span className="font-serif italic text-primary-glow">Advisory</span>
+              </h2>
+              <p className="text-on-surface-variant text-sm mb-8 leading-relaxed">
+                Beyond the concepts reviewed, do you have any related ideas or general feedback for our venture studio?
+              </p>
+
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-xs font-extrabold uppercase tracking-widest text-on-surface-variant mb-2">Related Concepts</label>
+                  <textarea
+                    value={relatedIdeas}
+                    onChange={(e) => setRelatedIdeas(e.target.value)}
+                    className="w-full bg-surface-container-low border border-white/10 rounded-xl p-4 focus:border-primary-glow outline-none transition-colors h-32 text-sm resize-none"
+                    placeholder="Are there other gaps in this market we should explore?"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-extrabold uppercase tracking-widest text-on-surface-variant mb-2">General Directives</label>
+                  <textarea
+                    value={generalFeedback}
+                    onChange={(e) => setGeneralFeedback(e.target.value)}
+                    className="w-full bg-surface-container-low border border-white/10 rounded-xl p-4 focus:border-primary-glow outline-none transition-colors h-32 text-sm resize-none"
+                    placeholder="Any overarching feedback for our strategic direction?"
+                  />
+                </div>
+
+                <button
+                  onClick={handleSubmitRecommendations}
+                  className="w-full bg-primary-glow text-surface font-extrabold py-4 rounded-xl cyan-glow hover:brightness-110 transition-all flex items-center justify-center gap-2"
+                >
+                  Finalize Evaluation <ArrowRight size={20} />
                 </button>
               </div>
             </div>

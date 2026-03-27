@@ -15,6 +15,17 @@ export const submit = mutation({
   },
 });
 
+export const submitGeneral = mutation({
+  args: {
+    expertName: v.string(),
+    generalFeedback: v.string(),
+    relatedIdeas: v.string(),
+  },
+  handler: async (ctx, args) => {
+    return await ctx.db.insert("generalFeedback", args);
+  },
+});
+
 export const listAll = query({
   handler: async (ctx) => {
     const feedback = await ctx.db.query("feedback").order("desc").collect();
