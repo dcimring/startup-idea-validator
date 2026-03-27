@@ -5,10 +5,12 @@ import AdminIdeaForm from "@/components/AdminIdeaForm";
 import AdminIdeaList from "@/components/AdminIdeaList";
 import RealTimeFeedbackTable from "@/components/RealTimeFeedbackTable";
 import StatusOrbs from "@/components/StatusOrbs";
-import { Plus, LayoutDashboard, Database, Activity } from "lucide-react";
+import { Plus, LayoutDashboard, Database, Activity, PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function AdminPage() {
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [editingIdea, setEditingIdea] = useState<any>(null);
 
   const handleOpenForm = (idea: any = null) => {
@@ -28,8 +30,13 @@ export default function AdminPage() {
       <div className="ambient-glow bottom-0 right-0 opacity-20" />
 
       {/* Sidebar - Concept Inventory */}
-      <aside className="w-80 flex-shrink-0 border-r border-white/5 bg-surface/50 backdrop-blur-xl flex flex-col z-10 min-w-0">
-        <div className="h-24 px-8 flex items-center border-b border-white/5">
+      <motion.aside 
+        initial={false}
+        animate={{ width: isSidebarOpen ? 320 : 0, opacity: isSidebarOpen ? 1 : 0 }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        className="h-screen border-r border-white/5 bg-surface/50 backdrop-blur-xl flex flex-col z-20 min-w-0 sticky top-0"
+      >
+        <div className="h-24 px-8 flex items-center border-b border-white/5 shrink-0 overflow-hidden whitespace-nowrap">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-primary-glow rounded-lg flex items-center justify-center cyan-glow">
               <LayoutDashboard size={18} className="text-surface" />
@@ -40,30 +47,31 @@ export default function AdminPage() {
           </div>
         </div>
 
-        <div className="p-8 pt-6 border-b border-white/5">
+        <div className="p-8 pt-6 border-b border-white/5 shrink-0 overflow-hidden">
           <button
             onClick={() => handleOpenForm()}
-            className="w-full flex items-center justify-center gap-2 bg-primary-glow text-surface font-extrabold py-3 rounded-xl cyan-glow hover:scale-[1.02] active:scale-[0.98] transition-all"
+            className="w-full flex items-center justify-center gap-2 bg-primary-glow text-surface font-extrabold py-3 rounded-xl cyan-glow hover:scale-[1.02] active:scale-[0.98] transition-all whitespace-nowrap"
           >
             <Plus size={18} /> New Concept
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar">
-          <div className="flex items-center justify-between text-[10px] font-extrabold uppercase tracking-widest text-on-surface-variant px-2">
+        <div className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar overflow-x-hidden">
+          <div className="flex items-center justify-between text-[10px] font-extrabold uppercase tracking-widest text-on-surface-variant px-2 whitespace-nowrap">
             <span className="flex items-center gap-2"><Database size={12} /> Concept Inventory</span>
             <span className="bg-white/5 px-2 py-0.5 rounded-full">Active</span>
           </div>
           <AdminIdeaList onEdit={handleOpenForm} />
         </div>
-        
-        <div className="p-6 border-t border-white/5">
-          <div className="glass p-4 rounded-xl border-white/5 flex items-center gap-3">
-            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            <span className="text-xs font-bold text-on-surface-variant">System Operational</span>
-          </div>
-        </div>
-      </aside>
+      </motion.aside>
+
+      {/* Sidebar Toggle Button (Floating) */}
+      <button
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+        className={`fixed bottom-8 left-8 z-30 p-4 rounded-2xl glass border-white/10 text-primary-glow shadow-2xl hover:scale-110 active:scale-95 transition-all ${!isSidebarOpen ? 'cyan-glow' : ''}`}
+      >
+        {isSidebarOpen ? <PanelLeftClose size={24} /> : <PanelLeftOpen size={24} />}
+      </button>
 
       {/* Main Content - Live Feed */}
       <section className="flex-1 flex flex-col z-10 min-w-0">

@@ -33,11 +33,11 @@ export default function RealTimeFeedbackTable() {
                 <td className="px-6 py-4">
                   {f.vote ? (
                     <span className="flex items-center gap-1 text-green-400">
-                      <ThumbsUp size={16} /> Like
+                      <ThumbsUp size={16} /> Yes
                     </span>
                   ) : (
                     <span className="flex items-center gap-1 text-red-400">
-                      <ThumbsDown size={16} /> Dislike
+                      <ThumbsDown size={16} /> No
                     </span>
                   )}
                 </td>

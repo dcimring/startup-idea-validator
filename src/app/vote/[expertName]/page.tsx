@@ -120,7 +120,7 @@ export default function ExpertVotePage() {
               <span className="absolute top-8 right-8 text-sm md:text-xs font-bold text-on-surface-variant uppercase tracking-widest">
                 Concept {currentIndex + 1} of {ideas.length}
               </span>
-              <h2 className="text-3xl md:text-4xl font-extrabold mb-2 mt-4 md:mt-2 text-primary-glow font-serif italic leading-tight pr-24">
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-2 mt-8 md:mt-2 text-primary-glow font-serif italic leading-tight pr-24">
                 {currentIdea.title}
               </h2>
               <p className="text-xs md:text-sm font-extrabold uppercase tracking-widest text-on-surface-variant mb-8 pr-24">

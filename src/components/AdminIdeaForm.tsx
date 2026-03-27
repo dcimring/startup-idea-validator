@@ -184,7 +184,7 @@ export default function AdminIdeaForm({
                     type="submit"
                     className="w-full bg-primary-glow text-surface font-extrabold py-4 rounded-2xl cyan-glow hover:brightness-110 transition-all flex items-center justify-center gap-2 mt-4"
                   >
-                    Deploy to Inventory <ArrowRight size={20} />
+                    Save <ArrowRight size={20} />
                   </button>
                 </form>
               </div>
