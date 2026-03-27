@@ -12,6 +12,7 @@ type Phase = "intro" | "review" | "feedback" | "recommendations" | "closing";
 export default function ExpertVotePage() {
   const { expertName } = useParams();
   const decodedExpertName = decodeURIComponent(expertName as string);
+  const formattedExpertName = decodedExpertName.charAt(0).toUpperCase() + decodedExpertName.slice(1);
   
   const ideas = useQuery(api.ideas.listActive);
   const submitFeedback = useMutation(api.feedback.submit);
@@ -56,7 +57,7 @@ export default function ExpertVotePage() {
     if (currentIdea && currentVote !== null) {
       await submitFeedback({
         ideaId: currentIdea._id,
-        expertName: decodedExpertName,
+        expertName: formattedExpertName,
         vote: currentVote,
         likeFeedback,
         dislikeFeedback,
@@ -80,7 +81,7 @@ export default function ExpertVotePage() {
 
   const handleSubmitRecommendations = async () => {
     await submitGeneralFeedback({
-      expertName: decodedExpertName,
+      expertName: formattedExpertName,
       generalFeedback,
       relatedIdeas,
     });
@@ -114,14 +115,14 @@ export default function ExpertVotePage() {
             <h1 className="text-5xl md:text-7xl font-extrabold mt-4 mb-6 leading-tight">
               Strategic <span className="font-serif italic text-primary-glow">Idea Review</span>
             </h1>
-            <p className="text-on-surface-variant text-lg mb-10 leading-relaxed">
-              Welcome, <span className="text-white font-bold">{decodedExpertName}</span>. Review our current concepts and provide your expert perspective. Your insights shape the future of these ventures.
+            <p className="text-on-surface-variant text-lg mb-10 leading-relaxed text-balance">
+              Welcome <span className="text-white font-bold">{formattedExpertName}</span>. Please take a look through the concepts I&rsquo;m working on. I&rsquo;d love to get your honest feedback on them. Excited to hear what you think.
             </p>
             <button
               onClick={handleStart}
               className="bg-primary-glow text-surface px-8 py-4 rounded-full font-extrabold flex items-center gap-2 mx-auto cyan-glow hover:scale-105 transition-transform"
             >
-              Begin Evaluation <ArrowRight size={20} />
+              Lets Begin <ArrowRight size={20} />
             </button>
           </motion.div>
         )}
@@ -235,7 +236,7 @@ export default function ExpertVotePage() {
                   onClick={handleSubmitReview}
                   className="w-full bg-primary-glow text-surface font-extrabold py-4 rounded-xl cyan-glow hover:brightness-110 transition-all flex items-center justify-center gap-2"
                 >
-                  Submit Review <ArrowRight size={20} />
+                  Submit <ArrowRight size={20} />
                 </button>
               </div>
             </div>
@@ -306,7 +307,7 @@ export default function ExpertVotePage() {
               Evaluation <span className="font-serif italic text-primary-glow">Complete</span>
             </h1>
             <p className="text-on-surface-variant text-lg mb-10 leading-relaxed">
-              Thank you for your professional contribution, <span className="text-white font-bold">{decodedExpertName}</span>. Your feedback has been recorded in the central matrix and will be reviewed by the founding team.
+              Thank you for your professional contribution, <span className="text-white font-bold">{formattedExpertName}</span>. Your feedback has been recorded in the central matrix and will be reviewed by the founding team.
             </p>
             <div className="h-1 w-24 bg-primary-glow/30 mx-auto rounded-full" />
           </motion.div>
