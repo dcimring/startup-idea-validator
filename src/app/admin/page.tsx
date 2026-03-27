@@ -24,7 +24,7 @@ export default function AdminPage() {
   };
 
   return (
-    <main className="min-h-screen flex bg-surface-dim relative overflow-hidden">
+    <main className="h-screen flex bg-surface-dim relative overflow-hidden">
       {/* Background Effects */}
       <div className="ambient-glow top-0 left-0" />
       <div className="ambient-glow bottom-0 right-0 opacity-20" />
@@ -34,7 +34,7 @@ export default function AdminPage() {
         initial={false}
         animate={{ width: isSidebarOpen ? 320 : 0, opacity: isSidebarOpen ? 1 : 0 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className="h-screen border-r border-white/5 bg-surface/50 backdrop-blur-xl flex flex-col z-20 min-w-0 sticky top-0"
+        className="h-full border-r border-white/5 bg-surface/50 backdrop-blur-xl flex flex-col z-20 min-w-0"
       >
         <div className="h-24 px-8 flex items-center border-b border-white/5 shrink-0 overflow-hidden whitespace-nowrap">
           <div className="flex items-center gap-3">
@@ -74,7 +74,7 @@ export default function AdminPage() {
       </button>
 
       {/* Main Content - Live Feed */}
-      <section className="flex-1 flex flex-col z-10 min-w-0">
+      <section className="flex-1 h-full flex flex-col z-10 min-w-0">
         <header className="h-auto md:h-24 py-6 md:py-0 px-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-white/5">
           <div className="flex items-center gap-4">
             <h2 className="text-2xl font-extrabold flex items-center gap-3">
