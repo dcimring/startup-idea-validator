@@ -12,8 +12,8 @@ export default function Home() {
           Idea <span className="text-primary-glow font-serif italic">Validator</span>
         </h1>
         <p className="text-xl text-on-surface-variant mb-12 leading-relaxed">
-          The ultimate protocol for stress-testing startup concepts with industry titans. 
-          Real-time feedback, cinematic aesthetics, and high-fidelity validation.
+          Get real-time feedback for your startup ideas from industry experts. 
+          The professional protocol for high-fidelity concept validation.
         </p>
 
         <div className="grid md:grid-cols-2 gap-6">

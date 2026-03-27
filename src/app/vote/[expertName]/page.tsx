@@ -75,7 +75,7 @@ export default function ExpertVotePage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-start p-4 md:p-6 pt-12 md:pt-24 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-start p-4 md:p-6 pt-12 md:pt-12 relative overflow-hidden">
       <div className="ambient-glow top-1/4 left-1/4" />
       <div className="ambient-glow bottom-1/4 right-1/4 opacity-10" />
 
