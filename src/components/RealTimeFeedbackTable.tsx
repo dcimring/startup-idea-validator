@@ -12,10 +12,10 @@ export default function RealTimeFeedbackTable() {
   }
 
   return (
-    <div className="glass rounded-xl overflow-hidden border-white/10">
+    <div className="bg-surface-container-low rounded-xl overflow-hidden border border-white/5 shadow-xl">
       <div className="overflow-x-auto">
         <table className="w-full text-left">
-          <thead className="bg-surface-container-low text-on-surface-variant text-xs font-extrabold uppercase tracking-widest">
+          <thead className="bg-surface-container-highest/50 text-on-surface-variant text-xs font-extrabold uppercase tracking-widest">
             <tr>
               <th className="px-6 py-4">Expert</th>
               <th className="px-6 py-4">Idea</th>
@@ -27,9 +27,9 @@ export default function RealTimeFeedbackTable() {
           </thead>
           <tbody className="divide-y divide-white/5 text-sm">
             {feedbacks.map((f) => (
-              <tr key={f._id} className="hover:bg-white/5 transition-colors group">
-                <td className="px-6 py-4 font-bold text-primary-glow">{f.expertName}</td>
-                <td className="px-6 py-4 italic font-serif text-on-surface group-hover:text-primary-glow">{f.ideaTitle}</td>
+              <tr key={f._id} className="hover:bg-white/[0.02] transition-colors group">
+                <td className="px-6 py-4 font-bold text-on-surface">{f.expertName}</td>
+                <td className="px-6 py-4 italic font-serif text-on-surface-variant group-hover:text-on-surface">{f.ideaTitle}</td>
                 <td className="px-6 py-4">
                   {f.vote ? (
                     <span className="flex items-center gap-1 text-green-400">
@@ -49,7 +49,7 @@ export default function RealTimeFeedbackTable() {
                 </td>
                 <td className="px-6 py-4 max-w-xs truncate text-on-surface-variant" title={f.comments}>
                   <div className="flex items-center gap-1">
-                    <MessageSquare size={14} className="text-secondary-glow" />
+                    <MessageSquare size={14} className="text-on-surface-variant" />
                     {f.comments || "-"}
                   </div>
                 </td>

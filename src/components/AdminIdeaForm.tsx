@@ -16,6 +16,7 @@ export default function AdminIdeaForm({
   initialIdea?: any;
 }) {
   const [title, setTitle] = useState("");
+  const [subtitle, setSubtitle] = useState("");
   const [pitch, setPitch] = useState("");
   const [features, setFeatures] = useState<string[]>([""]);
   
@@ -25,10 +26,12 @@ export default function AdminIdeaForm({
   useEffect(() => {
     if (initialIdea) {
       setTitle(initialIdea.title);
+      setSubtitle(initialIdea.subtitle || "");
       setPitch(initialIdea.pitch);
       setFeatures(initialIdea.features.length > 0 ? initialIdea.features : [""]);
     } else {
       setTitle("");
+      setSubtitle("");
       setPitch("");
       setFeatures([""]);
     }
@@ -42,6 +45,7 @@ export default function AdminIdeaForm({
       await updateIdea({
         id: initialIdea._id,
         title,
+        subtitle,
         pitch,
         features: cleanFeatures,
         isActive: initialIdea.isActive,
@@ -49,6 +53,7 @@ export default function AdminIdeaForm({
     } else {
       await addIdea({
         title,
+        subtitle,
         pitch,
         features: cleanFeatures,
         isActive: true,
@@ -114,6 +119,17 @@ export default function AdminIdeaForm({
                           onChange={(e) => setTitle(e.target.value)}
                           className="w-full bg-surface-container-low border border-white/5 rounded-xl p-3 focus:border-primary-glow outline-none transition-all text-sm"
                           placeholder="Project Name..."
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-extrabold uppercase tracking-widest text-on-surface-variant mb-2">Subtitle</label>
+                        <input
+                          type="text"
+                          value={subtitle}
+                          onChange={(e) => setSubtitle(e.target.value)}
+                          className="w-full bg-surface-container-low border border-white/5 rounded-xl p-3 focus:border-primary-glow outline-none transition-all text-sm"
+                          placeholder="Short description..."
                           required
                         />
                       </div>

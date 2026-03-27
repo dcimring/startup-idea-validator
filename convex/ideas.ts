@@ -4,6 +4,7 @@ import { v } from "convex/values";
 export const add = mutation({
   args: {
     title: v.string(),
+    subtitle: v.optional(v.string()),
     pitch: v.string(),
     features: v.array(v.string()),
     isActive: v.boolean(),
@@ -17,6 +18,7 @@ export const update = mutation({
   args: {
     id: v.id("ideas"),
     title: v.string(),
+    subtitle: v.optional(v.string()),
     pitch: v.string(),
     features: v.array(v.string()),
     isActive: v.boolean(),

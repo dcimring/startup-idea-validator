@@ -120,9 +120,12 @@ export default function ExpertVotePage() {
               <span className="absolute top-8 right-8 text-xs font-bold text-on-surface-variant uppercase tracking-widest">
                 Concept {currentIndex + 1} of {ideas.length}
               </span>
-              <h2 className="text-4xl font-extrabold mb-6 text-primary-glow font-serif italic">
+              <h2 className="text-4xl font-extrabold mb-2 text-primary-glow font-serif italic">
                 {currentIdea.title}
               </h2>
+              <p className="text-sm font-extrabold uppercase tracking-widest text-on-surface-variant mb-6">
+                {currentIdea.subtitle}
+              </p>
               <p className="text-xl text-on-surface mb-8 leading-relaxed italic border-l-4 border-primary-glow/30 pl-6 py-2">
                 &ldquo;{currentIdea.pitch}&rdquo;
               </p>

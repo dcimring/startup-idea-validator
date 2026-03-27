@@ -28,9 +28,9 @@ export default function AdminPage() {
       <div className="ambient-glow bottom-0 right-0 opacity-20" />
 
       {/* Sidebar - Concept Inventory */}
-      <aside className="w-80 border-r border-white/5 bg-surface/50 backdrop-blur-xl flex flex-col z-10">
-        <div className="p-8 border-b border-white/5">
-          <div className="flex items-center gap-3 mb-8">
+      <aside className="w-80 flex-shrink-0 border-r border-white/5 bg-surface/50 backdrop-blur-xl flex flex-col z-10 min-w-0">
+        <div className="h-24 px-8 flex items-center border-b border-white/5">
+          <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-primary-glow rounded-lg flex items-center justify-center cyan-glow">
               <LayoutDashboard size={18} className="text-surface" />
             </div>
@@ -38,7 +38,9 @@ export default function AdminPage() {
               Idea <span className="text-primary-glow font-serif italic">Validator</span>
             </h1>
           </div>
-          
+        </div>
+
+        <div className="p-8 pt-6 border-b border-white/5">
           <button
             onClick={() => handleOpenForm()}
             className="w-full flex items-center justify-center gap-2 bg-primary-glow text-surface font-extrabold py-3 rounded-xl cyan-glow hover:scale-[1.02] active:scale-[0.98] transition-all"
@@ -64,15 +66,17 @@ export default function AdminPage() {
       </aside>
 
       {/* Main Content - Live Feed */}
-      <section className="flex-1 flex flex-col z-10">
-        <header className="p-8 flex items-center justify-between">
+      <section className="flex-1 flex flex-col z-10 min-w-0">
+        <header className="h-auto md:h-24 py-6 md:py-0 px-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-white/5">
           <div className="flex items-center gap-4">
             <h2 className="text-2xl font-extrabold flex items-center gap-3">
               <Activity className="text-primary-glow" size={24} />
               Command <span className="text-primary-glow font-serif italic">Center</span>
             </h2>
           </div>
-          <StatusOrbs />
+          <div className="flex-shrink-0">
+            <StatusOrbs />
+          </div>
         </header>
 
         <div className="flex-1 p-8 pt-0 overflow-y-auto custom-scrollbar">

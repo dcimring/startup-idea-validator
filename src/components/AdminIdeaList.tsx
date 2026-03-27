@@ -18,6 +18,9 @@ export default function AdminIdeaList({ onEdit }: { onEdit: (idea: any) => void 
             <h4 className="font-extrabold text-sm text-on-surface group-hover:text-primary-glow transition-colors truncate">
               {idea.title}
             </h4>
+            <p className="text-[10px] font-bold text-primary-glow/60 uppercase tracking-tighter truncate">
+              {idea.subtitle}
+            </p>
             <p className="text-[10px] text-on-surface-variant line-clamp-2 leading-relaxed mt-1">
               {idea.pitch}
             </p>
@@ -27,6 +30,7 @@ export default function AdminIdeaList({ onEdit }: { onEdit: (idea: any) => void 
               onClick={() => updateIdea({ 
                 id: idea._id, 
                 title: idea.title, 
+                subtitle: idea.subtitle,
                 pitch: idea.pitch, 
                 features: idea.features, 
                 isActive: !idea.isActive 
