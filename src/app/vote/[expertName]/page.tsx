@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
@@ -29,6 +29,11 @@ export default function ExpertVotePage() {
   // General recommendations state
   const [generalFeedback, setGeneralFeedback] = useState("");
   const [relatedIdeas, setRelatedIdeas] = useState("");
+
+  // Scroll to top on phase or idea change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [phase, currentIndex]);
 
   if (!ideas) {
     return (
