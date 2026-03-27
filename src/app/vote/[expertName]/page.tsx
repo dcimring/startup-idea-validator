@@ -75,7 +75,7 @@ export default function ExpertVotePage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-start p-4 md:p-6 pt-12 md:pt-24 relative overflow-hidden">
       <div className="ambient-glow top-1/4 left-1/4" />
       <div className="ambient-glow bottom-1/4 right-1/4 opacity-10" />
 
@@ -117,13 +117,13 @@ export default function ExpertVotePage() {
             className="w-full max-w-xl"
           >
             <div className="glass p-8 md:p-12 rounded-3xl border-white/10 relative">
-              <span className="absolute top-8 right-8 text-xs font-bold text-on-surface-variant uppercase tracking-widest">
+              <span className="absolute top-8 right-8 text-sm md:text-xs font-bold text-on-surface-variant uppercase tracking-widest">
                 Concept {currentIndex + 1} of {ideas.length}
               </span>
-              <h2 className="text-4xl font-extrabold mb-2 text-primary-glow font-serif italic">
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-2 mt-4 md:mt-2 text-primary-glow font-serif italic leading-tight pr-24">
                 {currentIdea.title}
               </h2>
-              <p className="text-sm font-extrabold uppercase tracking-widest text-on-surface-variant mb-6">
+              <p className="text-xs md:text-sm font-extrabold uppercase tracking-widest text-on-surface-variant mb-8 pr-24">
                 {currentIdea.subtitle}
               </p>
               <p className="text-xl text-on-surface mb-8 leading-relaxed italic border-l-4 border-primary-glow/30 pl-6 py-2">
@@ -150,14 +150,14 @@ export default function ExpertVotePage() {
                   className="group flex flex-col items-center gap-3 p-6 rounded-2xl bg-green-500/5 border border-green-500/20 hover:bg-green-500/10 hover:border-green-500/40 transition-all"
                 >
                   <ThumbsUp size={32} className="text-green-400 group-hover:scale-110 transition-transform" />
-                  <span className="font-extrabold text-green-400">Validate</span>
+                  <span className="font-extrabold text-green-400">Yes</span>
                 </button>
                 <button
                   onClick={() => handleVote(false)}
                   className="group flex flex-col items-center gap-3 p-6 rounded-2xl bg-red-500/5 border border-red-500/20 hover:bg-red-500/10 hover:border-red-500/40 transition-all"
                 >
                   <ThumbsDown size={32} className="text-red-400 group-hover:scale-110 transition-transform" />
-                  <span className="font-extrabold text-red-400">Concerns</span>
+                  <span className="font-extrabold text-red-400">No</span>
                 </button>
               </div>
             </div>
