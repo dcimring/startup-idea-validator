@@ -1,41 +1,82 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-manrope);
-  --font-serif: var(--font-playfair);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
 
-  --color-surface: #0f1419;
-  --color-surface-dim: #0a0d10;
-  --color-surface-container-low: #171c21;
-  --color-surface-container-highest: #30353b;
-  --color-primary-glow: #00dbe9;
-  --color-secondary-glow: #2edcd7;
-  --color-on-surface: #dee3ea;
-  --color-on-surface-variant: #b9cacb;
+  --color-surface: #fbf9f4;
+  --color-surface-container-low: #f5f4ed;
+  --color-surface-container: #efeee5;
+  --color-surface-container-lowest: #ffffff;
+  --color-primary: #4d6169;
+  --color-on-surface: #31332c;
+  --color-tertiary: #575e78;
+  --color-outline-variant: rgba(49, 51, 44, 0.15);
 }
 
 @layer base {
   body {
-    @apply bg-surface text-on-surface;
+    @apply bg-surface text-on-surface font-body;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold;
   }
 }
 
-.glass {
-  background: rgba(222, 227, 234, 0.05);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(222, 227, 234, 0.1);
-}
-
-.cyan-glow {
-  box-shadow: 0px 0px 20px rgba(0, 219, 233, 0.3);
-}
-
-.ambient-glow {
+.paper-grain {
   position: fixed;
-  width: 70vw;
-  height: 70vh;
-  background: radial-gradient(circle, rgba(0, 219, 233, 0.05) 0%, transparent 70%);
-  filter: blur(120px);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
-  z-index: -1;
+  z-index: 100;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.asymmetric-card {
+  border-top-left-radius: 2px;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 1px;
+  border-bottom-right-radius: 3px;
+}
+
+.sketched-underline {
+  border-bottom: 1px solid var(--color-outline-variant);
+  transition: all 200ms ease-out;
+}
+
+.sketched-underline:focus-within {
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.ink-button {
+  @apply bg-primary text-surface px-6 py-2 rounded-sm transition-all duration-200;
+  box-shadow: 2px 2px 0px rgba(49, 51, 44, 0.1);
+}
+
+.ink-button:hover {
+  @apply brightness-110;
+  transform: rotate(1deg);
+}
+
+.ink-button:active {
+  transform: scale(0.98) rotate(0deg);
+}
+
+.vellum-drawer {
+  background: rgba(251, 249, 244, 0.8);
+  backdrop-filter: blur(12px);
+  border-left: 1px solid var(--color-outline-variant);
+}
+
+.ghost-button {
+  @apply border border-outline-variant px-6 py-2 rounded-sm text-primary transition-all duration-200;
+}
+
+.ghost-button:hover {
+  @apply bg-primary/5;
+  transform: rotate(-1deg);
 }

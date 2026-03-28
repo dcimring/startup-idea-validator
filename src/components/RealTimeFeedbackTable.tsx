@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { ThumbsUp, ThumbsDown, MessageSquare, X, ChevronRight, User, Lightbulb, AlertTriangle, MessageCircle } from "lucide-react";
+import { ThumbsUp, ThumbsDown, MessageSquare, X, ChevronRight, User, Lightbulb, AlertTriangle, MessageCircle, FileText } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function RealTimeFeedbackTable() {
@@ -11,52 +11,52 @@ export default function RealTimeFeedbackTable() {
   const [selectedFeedback, setSelectedFeedback] = useState<any>(null);
 
   if (!feedbacks) {
-    return <div className="text-on-surface-variant animate-pulse">Loading feedback matrix...</div>;
+    return <div className="text-tertiary animate-pulse text-xs uppercase tracking-widest">Compiling matrix...</div>;
   }
 
   return (
     <div className="relative flex-1 flex flex-col min-h-0">
-      <div className="bg-surface-container-low rounded-xl overflow-hidden border border-white/5 shadow-xl">
+      <div className="bg-surface-container-lowest border border-outline-variant shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left">
-            <thead className="bg-surface-container-highest/50 text-on-surface-variant text-xs font-extrabold uppercase tracking-widest">
+            <thead className="bg-surface-container text-tertiary text-[10px] font-bold uppercase tracking-[0.2em]">
               <tr>
                 <th className="px-6 py-4">Expert</th>
-                <th className="px-6 py-4">Idea</th>
-                <th className="px-6 py-4">Vote</th>
-                <th className="px-6 py-4">Likes</th>
-                <th className="px-6 py-4">Concerns</th>
-                <th className="px-6 py-4 text-right">Actions</th>
+                <th className="px-6 py-4">Concept</th>
+                <th className="px-6 py-4">Consensus</th>
+                <th className="px-6 py-4">Strengths</th>
+                <th className="px-6 py-4">Risks</th>
+                <th className="px-6 py-4 text-right">Draft</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5 text-sm">
+            <tbody className="divide-y divide-outline-variant/10 text-sm">
               {feedbacks.map((f) => (
                 <tr 
                   key={f._id} 
                   onClick={() => setSelectedFeedback(f)}
-                  className={`hover:bg-white/[0.04] transition-all group cursor-pointer ${selectedFeedback?._id === f._id ? 'bg-white/[0.04]' : ''}`}
+                  className={`hover:bg-surface-container transition-all group cursor-pointer ${selectedFeedback?._id === f._id ? 'bg-surface-container' : ''}`}
                 >
                   <td className="px-6 py-4 font-bold text-on-surface whitespace-nowrap">{f.expertName}</td>
-                  <td className="px-6 py-4 italic font-serif text-on-surface-variant group-hover:text-on-surface whitespace-nowrap">{f.ideaTitle}</td>
+                  <td className="px-6 py-4 italic font-display text-primary whitespace-nowrap">{f.ideaTitle}</td>
                   <td className="px-6 py-4">
                     {f.vote ? (
-                      <span className="flex items-center gap-1 text-green-400">
-                        <ThumbsUp size={14} /> Yes
+                      <span className="flex items-center gap-1.5 text-tertiary font-bold uppercase text-[10px]">
+                        <div className="w-1.5 h-1.5 rounded-full bg-tertiary" /> Valid
                       </span>
                     ) : (
-                      <span className="flex items-center gap-1 text-red-400">
-                        <ThumbsDown size={14} /> No
+                      <span className="flex items-center gap-1.5 text-primary font-bold uppercase text-[10px]">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary" /> Concerns
                       </span>
                     )}
                   </td>
-                  <td className="px-6 py-4 max-w-[200px] truncate text-on-surface-variant" title={f.likeFeedback}>
+                  <td className="px-6 py-4 max-w-[200px] truncate text-on-surface/70 font-medium italic" title={f.likeFeedback}>
                     {f.likeFeedback || "-"}
                   </td>
-                  <td className="px-6 py-4 max-w-[200px] truncate text-on-surface-variant" title={f.dislikeFeedback}>
+                  <td className="px-6 py-4 max-w-[200px] truncate text-on-surface/70 font-medium italic" title={f.dislikeFeedback}>
                     {f.dislikeFeedback || "-"}
                   </td>
                   <td className="px-6 py-4 text-right">
-                    <button className="text-primary-glow opacity-0 group-hover:opacity-100 transition-opacity p-2 hover:bg-primary-glow/10 rounded-lg">
+                    <button className="text-primary opacity-0 group-hover:opacity-100 transition-opacity p-2">
                       <ChevronRight size={18} />
                     </button>
                   </td>
@@ -65,123 +65,111 @@ export default function RealTimeFeedbackTable() {
             </tbody>
           </table>
           {feedbacks.length === 0 && (
-            <div className="p-12 text-center text-on-surface-variant italic">
-              No feedback received yet. Share your expert links to begin.
+            <div className="p-12 text-center text-tertiary italic text-xs uppercase tracking-widest">
+              Awaiting expert evaluation data...
             </div>
           )}
         </div>
       </div>
 
-      {/* Intelligence Drawer */}
+      {/* Intelligence Drawer (Vellum Style) */}
       <AnimatePresence>
         {selectedFeedback && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedFeedback(null)}
-              className="fixed inset-0 bg-surface-dim/40 backdrop-blur-sm z-40"
+              className="fixed inset-0 bg-on-surface/5 backdrop-blur-sm z-40"
             />
             
-            {/* Drawer */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed top-0 right-0 h-screen w-full max-w-lg bg-surface/80 backdrop-blur-2xl border-l border-white/10 z-50 shadow-2xl flex flex-col"
+              className="fixed top-0 right-0 h-screen w-full max-w-lg vellum-drawer z-50 shadow-2xl flex flex-col"
             >
-              <div className="h-24 px-8 flex items-center justify-between border-b border-white/5 shrink-0">
+              <div className="h-24 px-8 flex items-center justify-between border-b border-outline-variant shrink-0">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary-glow/10 rounded-xl flex items-center justify-center border border-primary-glow/20">
-                    <MessageCircle className="text-primary-glow" size={20} />
+                  <div className="w-10 h-10 bg-primary/10 rounded-sm flex items-center justify-center border border-primary/20">
+                    <FileText className="text-primary" size={20} />
                   </div>
                   <div>
-                    <h2 className="text-xl font-extrabold text-on-surface">Intelligence <span className="text-primary-glow font-serif italic">Briefing</span></h2>
-                    <p className="text-[10px] font-extrabold uppercase tracking-widest text-on-surface-variant">Expert Evaluation Report</p>
+                    <h2 className="text-xl font-display text-on-surface">Briefing <span className="text-primary italic">Record</span></h2>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary">Strategic Appraisal</p>
                   </div>
                 </div>
                 <button
                   onClick={() => setSelectedFeedback(null)}
-                  className="p-3 hover:bg-white/5 rounded-full transition-colors text-on-surface-variant"
+                  className="p-3 hover:bg-black/5 rounded-full transition-colors text-tertiary"
                 >
                   <X size={24} />
                 </button>
               </div>
 
               <div className="flex-1 overflow-y-auto p-8 space-y-8 custom-scrollbar">
-                {/* Header Info */}
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="glass p-4 rounded-2xl border-white/5">
-                    <div className="flex items-center gap-2 mb-2 text-primary-glow">
-                      <User size={14} />
-                      <span className="text-[10px] font-extrabold uppercase tracking-widest">Expert</span>
+                  <div className="bg-surface-container-lowest p-4 asymmetric-card border border-outline-variant">
+                    <div className="flex items-center gap-2 mb-2 text-primary opacity-60">
+                      <User size={12} />
+                      <span className="text-[8px] font-bold uppercase tracking-[0.2em]">Contributor</span>
                     </div>
-                    <div className="text-lg font-bold">{selectedFeedback.expertName}</div>
+                    <div className="text-lg font-display font-bold">{selectedFeedback.expertName}</div>
                   </div>
-                  <div className="glass p-4 rounded-2xl border-white/5">
-                    <div className="flex items-center gap-2 mb-2 text-secondary-glow">
-                      <Lightbulb size={14} />
-                      <span className="text-[10px] font-extrabold uppercase tracking-widest">Concept</span>
+                  <div className="bg-surface-container-lowest p-4 asymmetric-card border border-outline-variant">
+                    <div className="flex items-center gap-2 mb-2 text-tertiary opacity-60">
+                      <Lightbulb size={12} />
+                      <span className="text-[8px] font-bold uppercase tracking-[0.2em]">Subject</span>
                     </div>
-                    <div className="text-lg font-bold font-serif italic">{selectedFeedback.ideaTitle}</div>
+                    <div className="text-lg font-display font-bold italic">{selectedFeedback.ideaTitle}</div>
                   </div>
                 </div>
 
-                {/* Vote Status */}
-                <div className={`p-6 rounded-3xl border flex items-center justify-between ${selectedFeedback.vote ? 'bg-green-500/5 border-green-500/20' : 'bg-red-500/5 border-red-500/20'}`}>
-                  <div>
-                    <div className="text-[10px] font-extrabold uppercase tracking-widest text-on-surface-variant mb-1">Expert Consensus</div>
-                    <div className={`text-2xl font-black ${selectedFeedback.vote ? 'text-green-400' : 'text-red-400'}`}>
-                      {selectedFeedback.vote ? 'VALIDATED (YES)' : 'CONCERNS (NO)'}
-                    </div>
+                <div className={`p-6 asymmetric-card border ${selectedFeedback.vote ? 'bg-tertiary/5 border-tertiary/20' : 'bg-primary/5 border-primary/20'}`}>
+                  <div className="text-[8px] font-bold uppercase tracking-[0.2em] text-tertiary mb-1">Consensus Verdict</div>
+                  <div className={`text-2xl font-display font-black tracking-tighter ${selectedFeedback.vote ? 'text-tertiary' : 'text-primary'}`}>
+                    {selectedFeedback.vote ? 'VALIDATED' : 'CRITICAL CONCERNS'}
                   </div>
-                  {selectedFeedback.vote ? <ThumbsUp size={48} className="text-green-400/20" /> : <ThumbsDown size={48} className="text-red-400/20" />}
                 </div>
 
-                {/* Detailed Feedback */}
-                <div className="space-y-6">
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-2 text-green-400">
-                      <ThumbsUp size={16} />
-                      <h4 className="text-xs font-extrabold uppercase tracking-widest">Strategic Strengths</h4>
+                <div className="space-y-10">
+                  <div className="space-y-3 relative">
+                    <div className="flex items-center gap-2 text-tertiary">
+                      <h4 className="text-[10px] font-bold uppercase tracking-[0.2em]">01. Merits</h4>
                     </div>
-                    <div className="text-sm leading-relaxed text-on-surface-variant bg-white/[0.02] p-4 rounded-2xl border border-white/5 italic">
-                      {selectedFeedback.likeFeedback || "No specific strengths highlighted."}
+                    <div className="text-sm leading-relaxed text-on-surface font-medium border-l border-outline-variant pl-6 py-1">
+                      {selectedFeedback.likeFeedback || "No merits documented."}
                     </div>
                   </div>
 
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-2 text-red-400">
-                      <AlertTriangle size={16} />
-                      <h4 className="text-xs font-extrabold uppercase tracking-widest">Potential Risks</h4>
+                  <div className="space-y-3 relative">
+                    <div className="flex items-center gap-2 text-primary">
+                      <h4 className="text-[10px] font-bold uppercase tracking-[0.2em]">02. Exposure</h4>
                     </div>
-                    <div className="text-sm leading-relaxed text-on-surface-variant bg-white/[0.02] p-4 rounded-2xl border border-white/5 italic">
-                      {selectedFeedback.dislikeFeedback || "No specific risks highlighted."}
+                    <div className="text-sm leading-relaxed text-on-surface font-medium border-l border-outline-variant pl-6 py-1">
+                      {selectedFeedback.dislikeFeedback || "No exposure risks documented."}
                     </div>
                   </div>
 
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-2 text-primary-glow">
-                      <MessageSquare size={16} />
-                      <h4 className="text-xs font-extrabold uppercase tracking-widest">Additional Commentary</h4>
+                  <div className="space-y-3 relative">
+                    <div className="flex items-center gap-2 text-on-surface">
+                      <h4 className="text-[10px] font-bold uppercase tracking-[0.2em]">03. Strategy Annotations</h4>
                     </div>
-                    <div className="text-sm leading-relaxed text-on-surface bg-surface-container-low p-6 rounded-2xl border border-primary-glow/10 relative">
-                      <div className="absolute top-0 right-6 -translate-y-1/2 bg-primary-glow/10 border border-primary-glow/20 px-3 py-1 rounded-full text-[10px] font-bold text-primary-glow">STRATEGIC NOTE</div>
-                      {selectedFeedback.comments || "No additional commentary provided."}
+                    <div className="text-sm leading-relaxed text-on-surface bg-surface-container p-6 border border-outline-variant shadow-inner font-medium">
+                      {selectedFeedback.comments || "No strategy annotations provided."}
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="p-8 border-t border-white/5">
+              <div className="p-8 border-t border-outline-variant mt-auto bg-surface-container-low">
                 <button
                   onClick={() => setSelectedFeedback(null)}
-                  className="w-full bg-white/5 hover:bg-white/10 text-on-surface font-extrabold py-4 rounded-2xl transition-all"
+                  className="ghost-button w-full font-bold uppercase text-[10px] tracking-widest"
                 >
-                  Return to Matrix
+                  Close Briefing
                 </button>
               </div>
             </motion.div>

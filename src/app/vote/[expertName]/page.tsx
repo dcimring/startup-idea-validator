@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { motion, AnimatePresence } from "framer-motion";
-import { ThumbsUp, ThumbsDown, CheckCircle, ArrowRight, Loader2 } from "lucide-react";
+import { ThumbsUp, ThumbsDown, CheckCircle, ArrowRight, Loader2, PenTool, Sparkles, MessageCircle, FileText } from "lucide-react";
 
 type Phase = "intro" | "review" | "feedback" | "recommendations" | "closing";
 
@@ -22,24 +22,21 @@ export default function ExpertVotePage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentVote, setCurrentVote] = useState<boolean | null>(null);
   
-  // Feedback form state
   const [likeFeedback, setLikeFeedback] = useState("");
   const [dislikeFeedback, setDislikeFeedback] = useState("");
   const [comments, setComments] = useState("");
 
-  // General recommendations state
   const [generalFeedback, setGeneralFeedback] = useState("");
   const [relatedIdeas, setRelatedIdeas] = useState("");
 
-  // Scroll to top on phase or idea change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [phase, currentIndex]);
 
   if (!ideas) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <Loader2 className="animate-spin text-primary-glow" size={48} />
+      <div className="flex items-center justify-center min-h-screen bg-surface">
+        <Loader2 className="animate-spin text-primary" size={48} />
       </div>
     );
   }
@@ -64,7 +61,6 @@ export default function ExpertVotePage() {
         comments,
       });
 
-      // Reset review form
       setLikeFeedback("");
       setDislikeFeedback("");
       setComments("");
@@ -89,16 +85,13 @@ export default function ExpertVotePage() {
   };
 
   const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-    exit: { opacity: 0, y: -20, transition: { duration: 0.3 } },
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } },
+    exit: { opacity: 0, y: -10, transition: { duration: 0.2, ease: "easeIn" } },
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-start p-4 md:p-6 pt-12 md:pt-12 relative overflow-hidden">
-      <div className="ambient-glow top-1/4 left-1/4" />
-      <div className="ambient-glow bottom-1/4 right-1/4 opacity-10" />
-
+    <div className="min-h-screen flex flex-col items-center justify-start p-4 md:p-6 pt-12 md:pt-12 bg-surface relative overflow-x-hidden">
       <AnimatePresence mode="wait">
         {phase === "intro" && (
           <motion.div
@@ -107,22 +100,27 @@ export default function ExpertVotePage() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="text-center max-w-2xl"
+            className="text-center max-w-2xl mt-12"
           >
-            <span className="text-primary-glow font-extrabold uppercase tracking-widest text-sm">
-              Exclusive Access
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="w-12 h-12 bg-primary/5 rounded-sm flex items-center justify-center border border-primary/10">
+                <PenTool className="text-primary" size={24} />
+              </div>
+            </div>
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-tertiary">
+              Private Intelligence Briefing
             </span>
-            <h1 className="text-5xl md:text-7xl font-extrabold mt-4 mb-6 leading-tight">
-              Strategic <span className="font-serif italic text-primary-glow">Idea Review</span>
+            <h1 className="text-5xl md:text-7xl font-display font-bold mt-4 mb-8 leading-tight text-on-surface tracking-tight">
+              Strategic <span className="text-primary italic">Appraisal</span>
             </h1>
-            <p className="text-on-surface-variant text-lg mb-10 leading-relaxed text-balance">
-              Welcome <span className="text-white font-bold">{formattedExpertName}</span>. Please take a look through the concepts I&rsquo;m working on. I&rsquo;d love to get your honest feedback on them. Excited to hear what you think.
+            <p className="text-on-surface/70 text-lg mb-12 leading-relaxed text-balance font-medium">
+              Welcome <span className="text-on-surface font-bold underline decoration-primary/30 underline-offset-4">{formattedExpertName}</span>. Please take a look through the concepts I&rsquo;m working on. I&rsquo;d love to get your honest feedback on them. Excited to hear what you think.
             </p>
             <button
               onClick={handleStart}
-              className="bg-primary-glow text-surface px-8 py-4 rounded-full font-extrabold flex items-center gap-2 mx-auto cyan-glow hover:scale-105 transition-transform"
+              className="ink-button flex items-center gap-3 mx-auto uppercase text-xs font-bold tracking-[0.2em] py-5 px-10"
             >
-              Lets Begin <ArrowRight size={20} />
+              Lets Begin <ArrowRight size={18} />
             </button>
           </motion.div>
         )}
@@ -136,48 +134,54 @@ export default function ExpertVotePage() {
             exit="exit"
             className="w-full max-w-xl"
           >
-            <div className="glass p-8 md:p-12 rounded-3xl border-white/10 relative">
-              <span className="absolute top-8 right-8 text-sm md:text-xs font-bold text-on-surface-variant uppercase tracking-widest">
-                Concept {currentIndex + 1} of {ideas.length}
+            <div className="bg-surface-container-lowest p-10 md:p-16 border border-outline-variant relative asymmetric-card shadow-sm">
+              <span className="absolute top-10 right-10 text-[10px] font-bold text-tertiary uppercase tracking-[0.2em]">
+                Draft {currentIndex + 1} / {ideas.length}
               </span>
-              <h2 className="text-3xl md:text-4xl font-extrabold mb-2 mt-8 md:mt-2 text-primary-glow font-serif italic leading-tight pr-24">
-                {currentIdea.title}
-              </h2>
-              <p className="text-xs md:text-sm font-extrabold uppercase tracking-widest text-on-surface-variant mb-8 pr-24">
+              
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-2 h-2 bg-primary/20 rounded-full" />
+                <h2 className="text-3xl md:text-5xl font-display font-bold text-on-surface leading-tight tracking-tight uppercase">
+                  {currentIdea.title}
+                </h2>
+              </div>
+              
+              <p className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-primary/60 mb-10 border-b border-outline-variant/10 pb-4 inline-block">
                 {currentIdea.subtitle}
               </p>
-              <p className="text-xl text-on-surface mb-8 leading-relaxed italic border-l-4 border-primary-glow/30 pl-6 py-2">
+              
+              <p className="text-xl md:text-2xl text-on-surface mb-12 leading-relaxed italic font-medium border-l-2 border-primary/20 pl-8 py-2">
                 &ldquo;{currentIdea.pitch}&rdquo;
               </p>
               
-              <div className="space-y-4 mb-12">
-                <h3 className="text-xs font-extrabold uppercase tracking-widest text-on-surface-variant">
-                  Key Specifications
+              <div className="space-y-6 mb-16">
+                <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary flex items-center gap-2">
+                  <FileText size={12} /> Key Specifications
                 </h3>
-                <ul className="space-y-2">
+                <ul className="space-y-4">
                   {currentIdea.features.map((feature, i) => (
-                    <li key={i} className="flex items-start gap-3 text-on-surface-variant">
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary-glow mt-2 shrink-0" />
+                    <li key={i} className="flex items-start gap-4 text-on-surface/80 font-medium text-sm">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0 opacity-40" />
                       {feature}
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 gap-6 pt-8 border-t border-outline-variant/10">
                 <button
                   onClick={() => handleVote(true)}
-                  className="group flex flex-col items-center gap-3 p-6 rounded-2xl bg-green-500/5 border border-green-500/20 hover:bg-green-500/10 hover:border-green-500/40 transition-all"
+                  className="group flex flex-col items-center gap-4 p-8 bg-surface border border-outline-variant hover:border-tertiary/50 transition-all duration-200"
                 >
-                  <ThumbsUp size={32} className="text-green-400 group-hover:scale-110 transition-transform" />
-                  <span className="font-extrabold text-green-400">Yes</span>
+                  <ThumbsUp size={32} className="text-tertiary opacity-40 group-hover:opacity-100 transition-all group-hover:-translate-y-1" />
+                  <span className="font-bold text-xs uppercase tracking-widest text-tertiary">Yes</span>
                 </button>
                 <button
                   onClick={() => handleVote(false)}
-                  className="group flex flex-col items-center gap-3 p-6 rounded-2xl bg-red-500/5 border border-red-500/20 hover:bg-red-500/10 hover:border-red-500/40 transition-all"
+                  className="group flex flex-col items-center gap-4 p-8 bg-surface border border-outline-variant hover:border-primary/50 transition-all duration-200"
                 >
-                  <ThumbsDown size={32} className="text-red-400 group-hover:scale-110 transition-transform" />
-                  <span className="font-extrabold text-red-400">No</span>
+                  <ThumbsDown size={32} className="text-primary opacity-40 group-hover:opacity-100 transition-all group-hover:translate-y-1" />
+                  <span className="font-bold text-xs uppercase tracking-widest text-primary">No</span>
                 </button>
               </div>
             </div>
@@ -193,50 +197,50 @@ export default function ExpertVotePage() {
             exit="exit"
             className="w-full max-w-xl"
           >
-            <div className="glass p-8 md:p-12 rounded-3xl border-white/10">
-              <div className="flex items-center justify-between mb-8">
-                <h2 className="text-3xl font-extrabold">
-                  Expert <span className="font-serif italic text-primary-glow">Insights</span>
+            <div className="bg-surface-container-lowest p-10 md:p-16 border border-outline-variant asymmetric-card shadow-sm">
+              <div className="flex items-center justify-between mb-12 pb-6 border-b border-outline-variant/10">
+                <h2 className="text-3xl font-display font-bold text-on-surface uppercase tracking-tight">
+                  Expert <span className="text-primary italic">Critique</span>
                 </h2>
-                <div className={`px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest ${currentVote ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
-                  {currentVote ? 'Validation' : 'Critique'}
+                <div className={`px-4 py-1 border text-[10px] font-bold uppercase tracking-[0.2em] ${currentVote ? 'bg-tertiary/5 border-tertiary/20 text-tertiary' : 'bg-primary/5 border-primary/20 text-primary'}`}>
+                  {currentVote ? 'VALIDATION' : 'EXPOSURE'}
                 </div>
               </div>
 
-              <div className="space-y-6">
-                <div>
-                  <label className="block text-xs font-extrabold uppercase tracking-widest text-on-surface-variant mb-2">What stands out?</label>
+              <div className="space-y-10">
+                <div className="sketched-underline pb-1">
+                  <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mb-3">01. What stands out?</label>
                   <textarea
                     value={likeFeedback}
                     onChange={(e) => setLikeFeedback(e.target.value)}
-                    className="w-full bg-surface-container-low border border-white/10 rounded-xl p-4 focus:border-primary-glow outline-none transition-colors h-24 text-sm resize-none"
+                    className="w-full bg-transparent outline-none text-sm font-medium h-24 resize-none leading-relaxed placeholder:text-outline-variant italic"
                     placeholder="Identify strengths..."
                   />
                 </div>
-                <div>
-                  <label className="block text-xs font-extrabold uppercase tracking-widest text-on-surface-variant mb-2">Potential Pitfalls?</label>
+                <div className="sketched-underline pb-1">
+                  <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mb-3">02. Potential Pitfalls?</label>
                   <textarea
                     value={dislikeFeedback}
                     onChange={(e) => setDislikeFeedback(e.target.value)}
-                    className="w-full bg-surface-container-low border border-white/10 rounded-xl p-4 focus:border-primary-glow outline-none transition-colors h-24 text-sm resize-none"
+                    className="w-full bg-transparent outline-none text-sm font-medium h-24 resize-none leading-relaxed placeholder:text-outline-variant italic"
                     placeholder="Highlight risks..."
                   />
                 </div>
-                <div>
-                  <label className="block text-xs font-extrabold uppercase tracking-widest text-on-surface-variant mb-2">Additional Strategy</label>
+                <div className="sketched-underline pb-1">
+                  <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mb-3">03. Strategy Annotations</label>
                   <textarea
                     value={comments}
                     onChange={(e) => setComments(e.target.value)}
-                    className="w-full bg-surface-container-low border border-white/10 rounded-xl p-4 focus:border-primary-glow outline-none transition-colors h-24 text-sm resize-none"
+                    className="w-full bg-transparent outline-none text-sm font-medium h-24 resize-none leading-relaxed placeholder:text-outline-variant italic"
                     placeholder="Final thoughts..."
                   />
                 </div>
 
                 <button
                   onClick={handleSubmitReview}
-                  className="w-full bg-primary-glow text-surface font-extrabold py-4 rounded-xl cyan-glow hover:brightness-110 transition-all flex items-center justify-center gap-2"
+                  className="ink-button w-full flex items-center justify-center gap-3 uppercase text-xs font-bold tracking-[0.2em] py-5 mt-4"
                 >
-                  Submit <ArrowRight size={20} />
+                  Submit Review <ArrowRight size={18} />
                 </button>
               </div>
             </div>
@@ -252,39 +256,39 @@ export default function ExpertVotePage() {
             exit="exit"
             className="w-full max-w-xl"
           >
-            <div className="glass p-8 md:p-12 rounded-3xl border-white/10">
-              <h2 className="text-3xl font-extrabold mb-2">
-                Strategic <span className="font-serif italic text-primary-glow">Advisory</span>
+            <div className="bg-surface-container-lowest p-10 md:p-16 border border-outline-variant asymmetric-card shadow-sm">
+              <h2 className="text-3xl font-display font-bold text-on-surface uppercase tracking-tight mb-4">
+                Strategic <span className="text-primary italic">Advisory</span>
               </h2>
-              <p className="text-on-surface-variant text-sm mb-8 leading-relaxed">
-                Beyond the concepts reviewed, do you have any related ideas or general feedback for our venture studio?
+              <p className="text-on-surface/60 text-sm mb-12 leading-relaxed font-medium">
+                Beyond the concepts reviewed, do you have any related ideas or general feedback for our strategic direction?
               </p>
 
-              <div className="space-y-6">
-                <div>
-                  <label className="block text-xs font-extrabold uppercase tracking-widest text-on-surface-variant mb-2">Related Concepts</label>
+              <div className="space-y-10">
+                <div className="sketched-underline pb-1">
+                  <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mb-3">Related Concepts</label>
                   <textarea
                     value={relatedIdeas}
                     onChange={(e) => setRelatedIdeas(e.target.value)}
-                    className="w-full bg-surface-container-low border border-white/10 rounded-xl p-4 focus:border-primary-glow outline-none transition-colors h-32 text-sm resize-none"
+                    className="w-full bg-transparent outline-none text-sm font-medium h-32 resize-none leading-relaxed placeholder:text-outline-variant italic"
                     placeholder="Are there other gaps in this market we should explore?"
                   />
                 </div>
-                <div>
-                  <label className="block text-xs font-extrabold uppercase tracking-widest text-on-surface-variant mb-2">General Directives</label>
+                <div className="sketched-underline pb-1">
+                  <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mb-3">General Directives</label>
                   <textarea
                     value={generalFeedback}
                     onChange={(e) => setGeneralFeedback(e.target.value)}
-                    className="w-full bg-surface-container-low border border-white/10 rounded-xl p-4 focus:border-primary-glow outline-none transition-colors h-32 text-sm resize-none"
-                    placeholder="Any overarching feedback for our strategic direction?"
+                    className="w-full bg-transparent outline-none text-sm font-medium h-32 resize-none leading-relaxed placeholder:text-outline-variant italic"
+                    placeholder="Any overarching feedback for our tactical roadmap?"
                   />
                 </div>
 
                 <button
                   onClick={handleSubmitRecommendations}
-                  className="w-full bg-primary-glow text-surface font-extrabold py-4 rounded-xl cyan-glow hover:brightness-110 transition-all flex items-center justify-center gap-2"
+                  className="ink-button w-full flex items-center justify-center gap-3 uppercase text-xs font-bold tracking-[0.2em] py-5 mt-4"
                 >
-                  Finalize Evaluation <ArrowRight size={20} />
+                  Finalize Briefing <ArrowRight size={18} />
                 </button>
               </div>
             </div>
@@ -298,18 +302,18 @@ export default function ExpertVotePage() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="text-center max-w-xl"
+            className="text-center max-w-xl mt-12"
           >
-            <div className="w-24 h-24 bg-primary-glow/10 rounded-full flex items-center justify-center mx-auto mb-8 border border-primary-glow/30">
-              <CheckCircle size={48} className="text-primary-glow" />
+            <div className="w-20 h-20 bg-primary/5 border border-primary/10 rounded-sm flex items-center justify-center mx-auto mb-10">
+              <CheckCircle size={40} className="text-primary opacity-60" />
             </div>
-            <h1 className="text-5xl font-extrabold mb-6 leading-tight">
-              Evaluation <span className="font-serif italic text-primary-glow">Complete</span>
+            <h1 className="text-5xl font-display font-bold mb-8 leading-tight tracking-tight uppercase">
+              Appraisal <span className="text-primary italic">Complete</span>
             </h1>
-            <p className="text-on-surface-variant text-lg mb-10 leading-relaxed">
-              Thank you for your professional contribution, <span className="text-white font-bold">{formattedExpertName}</span>. Your feedback has been recorded in the central matrix and will be reviewed by the founding team.
+            <p className="text-on-surface/70 text-lg mb-12 leading-relaxed text-balance font-medium">
+              Thank you for your professional contribution, <span className="text-on-surface font-bold underline decoration-primary/30 underline-offset-4">{formattedExpertName}</span>. Your feedback has been recorded in the central matrix and will be reviewed by the founding team.
             </p>
-            <div className="h-1 w-24 bg-primary-glow/30 mx-auto rounded-full" />
+            <div className="h-0.5 w-16 bg-primary/20 mx-auto" />
           </motion.div>
         )}
       </AnimatePresence>

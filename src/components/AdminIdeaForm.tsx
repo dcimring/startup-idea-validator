@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { Plus, X, Sparkles, ArrowRight } from "lucide-react";
+import { Plus, X, Sparkles, ArrowRight, PenTool } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function AdminIdeaForm({ 
@@ -81,90 +81,95 @@ export default function AdminIdeaForm({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-surface-dim/80 backdrop-blur-md z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-on-surface/10 backdrop-blur-md z-50 flex items-center justify-center p-4"
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="glass w-full max-w-2xl rounded-3xl overflow-hidden border-white/10 shadow-2xl relative"
+              className="asymmetric-card bg-surface-container-lowest w-full max-w-2xl border border-outline-variant shadow-2xl relative overflow-hidden"
             >
-              <div className="p-8">
-                <div className="flex items-center justify-between mb-8">
+              <div className="p-10">
+                <div className="flex items-center justify-between mb-10">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-primary-glow/10 rounded-xl flex items-center justify-center border border-primary-glow/20">
-                      <Sparkles className="text-primary-glow" size={20} />
+                    <div className="w-10 h-10 bg-primary/10 rounded-sm flex items-center justify-center border border-primary/20">
+                      <PenTool className="text-primary" size={20} />
                     </div>
-                    <h2 className="text-3xl font-extrabold font-serif italic text-primary-glow">
-                      New Concept
-                    </h2>
+                    <div>
+                      <h2 className="text-3xl font-display text-on-surface leading-none">
+                        {initialIdea ? 'Edit' : 'New'} <span className="text-primary italic">Concept</span>
+                      </h2>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mt-1.5">Drafting Workspace</p>
+                    </div>
                   </div>
                   <button
                     onClick={onClose}
-                    className="p-2 hover:bg-white/5 rounded-full transition-colors text-on-surface-variant"
+                    className="p-2 hover:bg-black/5 rounded-full transition-colors text-tertiary"
                   >
                     <X size={24} />
                   </button>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-4">
-                      <div>
-                        <label className="block text-xs font-extrabold uppercase tracking-widest text-on-surface-variant mb-2">Title</label>
+                <form onSubmit={handleSubmit} className="space-y-10">
+                  <div className="grid md:grid-cols-2 gap-12">
+                    <div className="space-y-8">
+                      <div className="sketched-underline pb-1">
+                        <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mb-2">01. Project Title</label>
                         <input
                           type="text"
                           value={title}
                           onChange={(e) => setTitle(e.target.value)}
-                          className="w-full bg-surface-container-low border border-white/5 rounded-xl p-3 focus:border-primary-glow outline-none transition-all text-sm"
-                          placeholder="Project Name..."
+                          className="w-full bg-transparent outline-none text-lg font-display font-bold placeholder:text-outline-variant"
+                          placeholder="PropTech AI..."
                           required
                         />
                       </div>
-                      <div>
-                        <label className="block text-xs font-extrabold uppercase tracking-widest text-on-surface-variant mb-2">Subtitle</label>
+                      <div className="sketched-underline pb-1">
+                        <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mb-2">02. Concept Subtitle</label>
                         <input
                           type="text"
                           value={subtitle}
                           onChange={(e) => setSubtitle(e.target.value)}
-                          className="w-full bg-surface-container-low border border-white/5 rounded-xl p-3 focus:border-primary-glow outline-none transition-all text-sm"
-                          placeholder="Short description..."
+                          className="w-full bg-transparent outline-none text-sm font-medium placeholder:text-outline-variant"
+                          placeholder="Real Estate Due Diligence"
                           required
                         />
                       </div>
-                      <div>
-                        <label className="block text-xs font-extrabold uppercase tracking-widest text-on-surface-variant mb-2">Elevator Pitch</label>
+                      <div className="sketched-underline pb-1">
+                        <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mb-2">03. The Pitch</label>
                         <textarea
                           value={pitch}
                           onChange={(e) => setPitch(e.target.value)}
-                          className="w-full bg-surface-container-low border border-white/5 rounded-xl p-3 focus:border-primary-glow outline-none transition-all h-40 text-sm resize-none"
-                          placeholder="What problem are we solving?"
+                          className="w-full bg-transparent outline-none text-sm font-medium h-32 resize-none leading-relaxed placeholder:text-outline-variant italic"
+                          placeholder="Describe the problem and solution..."
                           required
                         />
                       </div>
                     </div>
 
-                    <div className="space-y-4">
-                      <label className="block text-xs font-extrabold uppercase tracking-widest text-on-surface-variant mb-2">Key Specifications</label>
-                      <div className="max-h-[240px] overflow-y-auto pr-2 space-y-3 custom-scrollbar">
+                    <div className="space-y-6">
+                      <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary">04. Specifications</label>
+                      <div className="max-h-[300px] overflow-y-auto pr-4 space-y-4 custom-scrollbar">
                         {features.map((feature, index) => (
-                          <div key={index} className="flex gap-2 group">
-                            <input
-                              type="text"
-                              value={feature}
-                              onChange={(e) => updateFeature(index, e.target.value)}
-                              className="flex-1 bg-surface-container-low border border-white/5 rounded-xl p-3 focus:border-primary-glow outline-none transition-all text-sm"
-                              placeholder="Add feature..."
-                              required
-                            />
+                          <div key={index} className="flex gap-3 group items-center">
+                            <div className="sketched-underline flex-1 pb-1">
+                              <input
+                                type="text"
+                                value={feature}
+                                onChange={(e) => updateFeature(index, e.target.value)}
+                                className="w-full bg-transparent outline-none text-sm font-medium"
+                                placeholder="Feature point..."
+                                required
+                              />
+                            </div>
                             {features.length > 1 && (
                               <button
                                 type="button"
                                 onClick={() => removeFeature(index)}
-                                className="p-3 text-red-400 hover:bg-red-400/10 rounded-xl transition-colors"
+                                className="p-1 text-primary/40 hover:text-primary transition-colors"
                               >
-                                <X size={18} />
+                                <X size={16} />
                               </button>
                             )}
                           </div>
@@ -173,19 +178,28 @@ export default function AdminIdeaForm({
                       <button
                         type="button"
                         onClick={addFeatureField}
-                        className="w-full flex items-center justify-center gap-2 py-3 border border-dashed border-white/10 rounded-xl text-xs font-bold text-on-surface-variant hover:border-primary-glow/50 hover:text-primary-glow transition-all"
+                        className="w-full flex items-center justify-center gap-2 py-3 border border-dashed border-outline-variant rounded-sm text-[10px] font-bold text-tertiary hover:border-primary/50 hover:text-primary transition-all"
                       >
                         <Plus size={14} /> Add Specification
                       </button>
                     </div>
                   </div>
 
-                  <button
-                    type="submit"
-                    className="w-full bg-primary-glow text-surface font-extrabold py-4 rounded-2xl cyan-glow hover:brightness-110 transition-all flex items-center justify-center gap-2 mt-4"
-                  >
-                    Save <ArrowRight size={20} />
-                  </button>
+                  <div className="flex gap-4 pt-4 border-t border-outline-variant/10">
+                    <button
+                      type="submit"
+                      className="ink-button flex-1 flex items-center justify-center gap-2 font-bold uppercase text-xs tracking-widest py-4"
+                    >
+                      Save Concept <ArrowRight size={16} />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={onClose}
+                      className="ghost-button px-8 font-bold uppercase text-[10px] tracking-widest"
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 </form>
               </div>
             </motion.div>

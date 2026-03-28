@@ -2,7 +2,7 @@
 
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { Lightbulb, Users, BarChart3 } from "lucide-react";
+import { Lightbulb, Users, BarChart3, Bookmark } from "lucide-react";
 
 export default function StatusOrbs() {
   const ideas = useQuery(api.ideas.listAll);
@@ -10,40 +10,37 @@ export default function StatusOrbs() {
 
   const stats = [
     {
-      label: "Total Concepts",
+      label: "Inventory",
       value: ideas?.length ?? 0,
-      icon: Lightbulb,
-      color: "text-primary-glow",
-      bg: "bg-primary-glow/10",
+      icon: Bookmark,
+      color: "text-primary",
     },
     {
-      label: "Expert Reviews",
+      label: "Expert Feed",
       value: feedbacks?.length ?? 0,
       icon: BarChart3,
-      color: "text-secondary-glow",
-      bg: "bg-secondary-glow/10",
+      color: "text-tertiary",
     },
     {
-      label: "Unique Experts",
+      label: "Collaborators",
       value: new Set(feedbacks?.map((f) => f.expertName)).size,
       icon: Users,
       color: "text-on-surface",
-      bg: "bg-white/5",
     },
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div className="flex items-center gap-8">
       {stats.map((stat, i) => (
-        <div key={i} className="glass p-4 rounded-2xl border-white/5 flex items-center gap-4">
-          <div className={`w-12 h-12 ${stat.bg} rounded-xl flex items-center justify-center border border-white/5`}>
-            <stat.icon className={stat.color} size={24} />
+        <div key={i} className="flex items-center gap-3">
+          <div className="w-8 h-8 flex items-center justify-center">
+            <stat.icon className={stat.color} size={18} />
           </div>
           <div>
-            <div className="text-2xl font-extrabold text-on-surface leading-none mb-1">
+            <div className="text-xl font-display font-bold text-on-surface leading-none">
               {stat.value}
             </div>
-            <div className="text-[10px] font-extrabold uppercase tracking-widest text-on-surface-variant">
+            <div className="text-[8px] font-bold uppercase tracking-[0.2em] text-tertiary mt-0.5">
               {stat.label}
             </div>
           </div>

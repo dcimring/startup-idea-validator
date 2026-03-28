@@ -1,18 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, Playfair_Display } from "next/font/google";
+import { Space_Grotesk, Work_Sans } from "next/font/google";
 import "./globals.css";
 import { ConvexClientProvider } from "@/components/ConvexClientProvider";
 
-const manrope = Manrope({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-manrope",
-  weight: ["400", "700", "800"],
+  variable: "--font-display",
+  weight: ["400", "700"],
 });
 
-const playfair = Playfair_Display({
+const workSans = Work_Sans({
   subsets: ["latin"],
-  variable: "--font-playfair",
-  style: ["italic"],
+  variable: "--font-body",
+  weight: ["400", "500", "700"],
 });
 
 export const viewport: Viewport = {
@@ -24,7 +24,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: "Startup Idea Validator",
-  description: "Expert feedback for your next big thing.",
+  description: "Crafting concepts with precision.",
 };
 
 export default function RootLayout({
@@ -35,8 +35,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${manrope.variable} ${playfair.variable} antialiased bg-[#0f1419] text-[#dee3ea] min-h-screen font-sans`}
+        className={`${spaceGrotesk.variable} ${workSans.variable} antialiased bg-[#fbf9f4] text-[#31332c] min-h-screen font-body`}
       >
+        <div className="paper-grain" />
         <ConvexClientProvider>{children}</ConvexClientProvider>
       </body>
     </html>
