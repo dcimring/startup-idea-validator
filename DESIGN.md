@@ -1,61 +1,82 @@
-# Design System: The Kinetic Observatory
+```markdown
+# Design System: The Architect’s Draft
 
-This document outlines the design language, aesthetic directions, and visual tokens used in the Cayman PropTech AI project. It is intended to serve as a blueprint for maintaining visual consistency across related applications.
+## 1. Overview & Creative North Star: "The Living Manuscript"
+This design system rejects the clinical coldness of traditional SaaS interfaces in favor of **The Living Manuscript**. Our North Star is the intersection of a high-end architect’s vellum sketch and a modern editorial layout.
 
-## Design Ethos
-The "Kinetic Observatory" theme is a blend of **cinematic minimalism** and **high-tech precision**. It prioritizes deep, dark surfaces contrasted with vibrant, glowing primary accents to create a sense of advanced intelligence and premium utility.
+The goal is to evoke the feeling of a "work in progress" that is simultaneously masterful and precise. We break the "template" look by utilizing intentional asymmetry—where elements are slightly offset as if placed by hand—and overlapping layers that mimic physical sheets of paper. This system prioritizes tactility, using "ink on paper" as its primary metaphor to create a space where startup founders feel they are *crafting* their pitch, not just filling out forms.
 
-## 1. Color Palette
+---
 
-### Surfaces & Backgrounds
-Deep, near-black neutrals that provide a sophisticated backdrop for content.
-- **Surface (Base):** `#0f1419` — Main application background.
-- **Surface Dim:** `#0a0d10` — Used for modal backdrops and high-contrast regions.
-- **Surface Container Low:** `#171c21` — Default card background.
-- **Surface Container Highest:** `#30353b` — Hover states and elevated UI elements.
+## 2. Colors & Surface Philosophy
+The palette is rooted in organic, warm neutrals that reduce eye strain and provide a premium "heavy stock" paper feel.
 
-### Brand & Accents (The Glow)
-Vibrant cyan and teal tones used for primary actions, iconography, and ambient effects.
-- **Primary Fixed Dim:** `#00dbe9` — The signature "Cyan Glow" color.
-- **Secondary Fixed Dim:** `#2edcd7` — Complementary teal for gradients and secondary highlights.
-- **Primary Container:** `#00f0ff` — High-intensity accents.
+- **Background & Base:** Use `surface` (`#fbf9f4`) as your primary canvas.
+- **The "No-Line" Rule:** Sectioning must never be achieved through standard 1px solid gray lines. Instead, use background shifts. A side panel should transition from `surface` to `surface-container-low` (`#f5f4ed`) to define its boundary.
+- **Surface Hierarchy & Nesting:** Treat the interface as stacked physical sheets.
+- **Base:** `surface`
+- **Inlaid Sections:** `surface-container`
+- **Floating "Notes":** `surface-container-lowest` (`#ffffff`) to create a "bright paper" highlight.
+- **The "Ink & Graphite" Rule:** Primary actions and text use `primary` (`#4d6169`) and `on-surface` (`#31332c`). These should feel like high-quality pigment ink, not digital black.
+- **Signature Textures:** Apply a subtle grain overlay (2-3% opacity) across the `background` to break the digital flatness. For main CTAs, use a subtle gradient from `primary` to `primary_dim` to simulate the slight pooling of ink at the edge of a stroke.
 
-### Typography Colors
-- **On Surface:** `#dee3ea` — Primary text, high readability.
-- **On Surface Variant:** `#b9cacb` — Secondary text, descriptions, and labels.
-- **On Primary:** `#00363a` — Text appearing on top of primary-colored elements.
+---
 
-## 2. Typography
+## 3. Typography: The Human/Machine Duality
+We use a high-contrast typographic pairing to balance professional structure with creative ideation.
 
-### Primary Typeface: Manrope
-- **Role:** UI, body copy, and technical labels.
-- **Characteristics:** Clean, modern sans-serif with excellent legibility.
-- **Styles:** Regular (400) for body, Bold (700) for subheads, Extrabold (800) for impact.
+- **Display & Headlines (Space Grotesk):** This monospaced-leaning sans-serif represents the "structure." Use `display-lg` for hero statements and `headline-md` for section headers. Its geometric nature feels like a blueprint.
+- **Body & Titles (Work Sans):** Use `body-lg` for readability. Work Sans provides a clean, neutral balance that doesn't compete with the "draft" elements.
+- **The "Annotated" Feel:** Use `label-md` in `tertiary` (`#575e78`) for micro-copy or helper text. This should feel like a designer’s side-note scribbled in the margins.
 
-### Secondary Typeface: Playfair Display
-- **Role:** Serif accents and display headlines.
-- **Characteristics:** Sophisticated, italicized serif that adds a "luxury real estate" feel.
-- **Usage:** Typically used for "Cayman Real Estate" headers or branding flourishes.
+---
 
-## 3. UI Patterns & Effects
+## 4. Elevation & Depth: Tonal Layering
+Traditional box shadows are forbidden. We use "Ambient Depth" to simulate physical paper.
 
-### Bento Grid Layout
-The primary dashboard structure uses a **Bento Grid**—a collection of varied-size rectangles that organize diverse data into a cohesive, tiled interface. This pattern communicates variety and modularity.
+- **The Layering Principle:** To lift a card, place a `surface-container-lowest` object on a `surface-container` background. The color shift provides the "lift."
+- **Ambient Shadows:** For floating modals or "sketched" popovers, use an extra-diffused shadow: `box-shadow: 0 20px 40px rgba(49, 51, 44, 0.06);`. The shadow color must be a derivative of `on-surface`, never pure black.
+- **The "Ghost Border":** If a boundary is required for accessibility, use the `outline-variant` token at 15% opacity. It should look like a faint pencil guideline, not a container.
+- **Glassmorphism:** For navigation overlays, use `surface` at 80% opacity with a `backdrop-blur` of 12px. This mimics the look of translucent tracing paper.
 
-### Glassmorphism (Glass Effect)
-Modals and overlays utilize a glass-like treatment:
-- **Background:** `rgba(222, 227, 234, 0.15)` (Surface Bright at 15% opacity).
-- **Blur:** `20px` backdrop-filter.
-- **Border:** Subtle `1px` border with low opacity (`10%`) to define edges without adding visual weight.
+---
 
-### Ambient Cinematic Glow
-Use large, highly blurred radial gradients in the background to create depth.
-- **Implementation:** 70% width/height containers with `120px-180px` blur, set at low opacity (`5%`) to prevent distraction.
+## 5. Components
 
-### Shadows & Elevation
-- **Ambient Shadow:** `0px 24px 48px rgba(0, 240, 255, 0.06)` — A soft, cyan-tinted shadow that makes elements appear to float over a light source.
+### Buttons: The Sketched Box
+- **Primary:** A solid fill of `primary` (`#4d6169`). The corners should use the `sm` (`0.125rem`) roundedness to look hand-cut. Apply a custom `border-image` that mimics a slightly shaky ink stroke.
+- **Secondary:** A "Ghost" button with an irregular border (use an SVG mask for a hand-drawn look) using the `outline` token.
+- **States:** On hover, buttons should subtly shift in "tilt" (1-degree rotation) to mimic a physical object being touched.
 
-## 4. Interaction Design
-- **Hover Transitions:** Elements should subtly lift (`-8px`) and shift background color to `Surface Container Highest`.
-- **Iconography:** Use `Lucide React` icons. They should be consistently colored with `Primary Fixed Dim` and often wrapped in a container with a subtle shadow and border.
-- **Micro-animations:** Use pulse rings and dots (using `Secondary Fixed Dim`) to indicate "live" or "active" AI states.
+### Cards & Containers
+- **Forbid Dividers:** Never use `
+` tags. Use `spacing-8` (2.75rem) to create clear mental breaks through whitespace.
+
+- **Asymmetry:** Give cards a random `border-radius` variance (e.g., top-left: 2px, top-right: 4px, bottom-left: 1px, bottom-right: 3px) to reinforce the "hand-cut paper" aesthetic.
+
+### Input Fields: The Underline
+- Abandon the four-sided box. Use a "ruled paper" approach: a single bottom border using `outline-variant`. When focused, the line transitions to `primary` and thickens slightly like a bold ink stroke.
+
+### Specialized Component: The "Margin Note"
+- A specific tooltip variant positioned in the far right/left gutters. Uses `label-sm` in `secondary` color, acting as a "peer review" or "mentor tip" within the pitch tool.
+
+---
+
+## 6. Do’s and Don’ts
+
+### Do:
+- **Use White Space as a Luxury:** Leverage the `20` and `24` spacing tokens to let the "paper" breathe.
+- **Embrace Imperfection:** If an icon is 1px "off-center" visually but feels right, leave it. The system should feel human.
+- **Layer Surfaces:** Use `surface-container-highest` for the most important interactive "work areas" to draw the eye.
+
+### Don’t:
+- **Don't Use Sharp Gradients:** No high-contrast metallic or neon gradients. Stay within the matte, "ink-and-paper" tonal range.
+- **Don't Use 1px Solid #000:** It breaks the "Architect's Draft" illusion. Always use the `outline` or `primary` tokens.
+- **Don't Over-Animate:** Transitions should be "Snappy but Soft" (e.g., `200ms ease-out`). Avoid bouncy, "bubbly" animations that feel too "app-like." We are building a professional tool.
+
+---
+
+## 7. Interaction Model: The Tactile Response
+Interaction should feel like moving paper on a desk.
+- **Draggable Elements:** When a user grabs a component, increase the shadow diffusion and add a 2-degree rotation.
+- **Success States:** Use `tertiary` (muted blue-green) rather than a loud, "digital" green. Success is a subtle ink-stamp, not a flashing neon sign.```
