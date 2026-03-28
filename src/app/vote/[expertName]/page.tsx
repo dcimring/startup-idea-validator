@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { ThumbsUp, ThumbsDown, CheckCircle, ArrowRight, Loader2, PenTool, Sparkles, MessageCircle, FileText } from "lucide-react";
 
 type Phase = "intro" | "review" | "feedback" | "recommendations" | "closing";
@@ -84,7 +84,7 @@ export default function ExpertVotePage() {
     setPhase("closing");
   };
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0, y: 10 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } },
     exit: { opacity: 0, y: -10, transition: { duration: 0.2, ease: "easeIn" } },
