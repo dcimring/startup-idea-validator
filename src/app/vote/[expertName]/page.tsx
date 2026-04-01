@@ -91,7 +91,7 @@ export default function ExpertVotePage() {
   };
 
   return (
-    <div className="min-h-screen bg-surface flex flex-col items-center relative overflow-x-hidden pb-32 md:pb-0">
+    <div className="min-h-screen bg-surface flex flex-col items-center relative overflow-x-hidden pb-32">
       {/* Editorial Header (Stays constant mostly) */}
       <header className="w-full max-w-4xl px-6 py-8 md:py-12 flex items-center justify-between z-10 shrink-0">
         <div className="flex items-center gap-3">
@@ -175,12 +175,13 @@ export default function ExpertVotePage() {
                 {/* Right Col: The Vision */}
                 <div className="flex-1 flex flex-col gap-12 min-h-0">
                 <div className="space-y-4">
-                    <h3 className="text-[8px] font-bold uppercase tracking-[0.3em] text-tertiary">02. The Proposed Solution</h3>
-                    <div className="text-lg md:text-3xl font-display font-medium text-on-surface leading-relaxed tracking-tight">
+                  <h3 className="text-[8px] font-bold uppercase tracking-[0.3em] text-tertiary">02. The Proposed Solution</h3>
+                  <div className="bg-[#fdfae6] border border-[#f1eed3] p-6 md:p-8 asymmetric-card shadow-sm">
+                    <div className="text-lg md:text-2xl font-display font-medium text-on-surface leading-relaxed tracking-tight">
                       {currentIdea.pitch}
                     </div>
                   </div>
-
+                </div>
                   <div className="space-y-4 flex-1 min-h-0 flex flex-col">
                     <h3 className="text-[8px] font-bold uppercase tracking-[0.3em] text-tertiary flex items-center gap-2">
                       <Sparkles size={10} /> 03. Tactical Specs
@@ -196,9 +197,14 @@ export default function ExpertVotePage() {
                 </div>
               </div>
 
-              {/* Fixed-Position Voting (Handled by Layout but represented here) */}
+              {/* Fixed-Position Voting */}
               <div className="fixed bottom-0 left-0 w-full p-6 md:p-12 flex justify-center pointer-events-none z-30">
-                <div className="bg-surface/80 backdrop-blur-xl border border-outline-variant p-2 flex gap-4 pointer-events-auto shadow-2xl asymmetric-card max-w-md w-full">
+                <motion.div 
+                  initial={{ y: 100, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.5, type: "spring", stiffness: 260, damping: 20 }}
+                  className="bg-surface/80 backdrop-blur-xl border border-outline-variant p-2 flex gap-4 pointer-events-auto shadow-2xl asymmetric-card max-w-md w-full"
+                >
                   <button
                     onClick={() => handleVote(true)}
                     className="flex-1 group flex items-center justify-center gap-3 py-4 bg-tertiary text-surface font-bold uppercase text-[10px] tracking-widest hover:rotate-1 transition-all"
@@ -211,7 +217,7 @@ export default function ExpertVotePage() {
                   >
                     <ThumbsDown size={14} className="opacity-60" /> No
                   </button>
-                </div>
+                </motion.div>
               </div>
             </motion.div>
           )}
