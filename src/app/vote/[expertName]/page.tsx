@@ -174,14 +174,12 @@ export default function ExpertVotePage() {
 
                 {/* Right Col: The Vision */}
                 <div className="flex-1 flex flex-col gap-12 min-h-0">
-                <div className="space-y-4">
-                  <h3 className="text-[8px] font-bold uppercase tracking-[0.3em] text-tertiary">02. The Proposed Solution</h3>
-                  <div className="bg-[#fdfae6] border border-[#f1eed3] p-6 md:p-8 asymmetric-card shadow-sm">
+                  <div className="space-y-4">
+                    <h3 className="text-[8px] font-bold uppercase tracking-[0.3em] text-tertiary">02. The Proposed Solution</h3>
                     <div className="text-lg md:text-2xl font-display font-medium text-on-surface leading-relaxed tracking-tight">
                       {currentIdea.pitch}
                     </div>
                   </div>
-                </div>
                   <div className="space-y-4 flex-1 min-h-0 flex flex-col">
                     <h3 className="text-[8px] font-bold uppercase tracking-[0.3em] text-tertiary flex items-center gap-2">
                       <Sparkles size={10} /> 03. Tactical Specs
