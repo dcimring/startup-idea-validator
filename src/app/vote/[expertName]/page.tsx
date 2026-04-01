@@ -236,29 +236,29 @@ export default function ExpertVotePage() {
 
               <div className="space-y-12">
                 <div className="sketched-underline pb-1">
-                  <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mb-3">01. Why will it not work?</label>
+                  <label className="block text-xs font-bold uppercase tracking-[0.2em] text-tertiary mb-3">01. Why will it not work?</label>
                   <textarea
                     value={reasonsForFailure}
                     onChange={(e) => setReasonsForFailure(e.target.value)}
-                    className="w-full bg-transparent outline-none text-sm font-medium h-24 resize-none leading-relaxed placeholder:text-outline-variant italic"
+                    className="w-full bg-transparent outline-none text-base font-medium h-24 resize-none leading-relaxed placeholder:text-outline-variant italic"
                     placeholder="If this idea fails what do you think the reason would be"
                   />
                 </div>
                 <div className="sketched-underline pb-1">
-                  <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mb-3">02. How is the problem currently being solved?</label>
+                  <label className="block text-xs font-bold uppercase tracking-[0.2em] text-tertiary mb-3">02. How is the problem currently being solved?</label>
                   <textarea
                     value={existingSolutions}
                     onChange={(e) => setExistingSolutions(e.target.value)}
-                    className="w-full bg-transparent outline-none text-sm font-medium h-24 resize-none leading-relaxed placeholder:text-outline-variant italic"
+                    className="w-full bg-transparent outline-none text-base font-medium h-24 resize-none leading-relaxed placeholder:text-outline-variant italic"
                     placeholder="Is the current solution “good enough” or would someone pay for a cheaper / better / faster solution"
                   />
                 </div>
                 <div className="sketched-underline pb-1">
-                  <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mb-3">03. What am I missing?</label>
+                  <label className="block text-xs font-bold uppercase tracking-[0.2em] text-tertiary mb-3">03. What am I missing?</label>
                   <textarea
                     value={hiddenHurdles}
                     onChange={(e) => setHiddenHurdles(e.target.value)}
-                    className="w-full bg-transparent outline-none text-sm font-medium h-24 resize-none leading-relaxed placeholder:text-outline-variant italic"
+                    className="w-full bg-transparent outline-none text-base font-medium h-24 resize-none leading-relaxed placeholder:text-outline-variant italic"
                     placeholder="Is there some regulatory or other hurdle I’m missing"
                   />
                 </div>
