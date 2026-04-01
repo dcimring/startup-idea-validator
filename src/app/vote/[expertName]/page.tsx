@@ -166,7 +166,7 @@ export default function ExpertVotePage() {
 
                   <div className="space-y-3">
                     <h3 className="text-[8px] font-bold uppercase tracking-[0.3em] text-tertiary">01. The Context</h3>
-                    <div className="text-sm leading-relaxed text-on-surface/70 font-medium italic">
+                    <div className="text-lg md:text-sm leading-relaxed text-on-surface/70 font-medium italic">
                       {currentIdea.problem}
                     </div>
                   </div>
@@ -174,9 +174,9 @@ export default function ExpertVotePage() {
 
                 {/* Right Col: The Vision */}
                 <div className="flex-1 flex flex-col gap-12 min-h-0">
-                  <div className="space-y-4">
+                <div className="space-y-4">
                     <h3 className="text-[8px] font-bold uppercase tracking-[0.3em] text-tertiary">02. The Proposed Solution</h3>
-                    <div className="text-2xl md:text-4xl font-display font-bold text-on-surface leading-[1.1] tracking-tight uppercase">
+                    <div className="text-lg md:text-3xl font-display font-medium text-on-surface leading-relaxed tracking-tight">
                       {currentIdea.pitch}
                     </div>
                   </div>
