@@ -91,7 +91,7 @@ export default function ExpertVotePage() {
   };
 
   return (
-    <div className="min-h-screen bg-surface flex flex-col items-center relative overflow-x-hidden">
+    <div className="min-h-screen bg-surface flex flex-col items-center relative overflow-x-hidden pb-32 md:pb-0">
       {/* Editorial Header (Stays constant mostly) */}
       <header className="w-full max-w-4xl px-6 py-8 md:py-12 flex items-center justify-between z-10 shrink-0">
         <div className="flex items-center gap-3">
