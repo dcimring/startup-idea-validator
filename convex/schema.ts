@@ -14,9 +14,9 @@ export default defineSchema({
     ideaId: v.id("ideas"),
     expertName: v.string(),
     vote: v.boolean(),
-    likeFeedback: v.string(),
-    dislikeFeedback: v.string(),
-    comments: v.string(),
+    reasonsForFailure: v.string(),
+    existingSolutions: v.string(),
+    hiddenHurdles: v.string(),
   }),
   generalFeedback: defineTable({
     expertName: v.string(),

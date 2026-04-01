@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { ThumbsUp, ThumbsDown, MessageSquare, X, ChevronRight, User, Lightbulb, AlertTriangle, MessageCircle, FileText } from "lucide-react";
+import { ThumbsUp, ThumbsDown, MessageSquare, X, ChevronRight, User, Lightbulb, AlertTriangle, MessageCircle, FileText, Ban, Search, HelpCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function RealTimeFeedbackTable() {
@@ -24,8 +24,8 @@ export default function RealTimeFeedbackTable() {
                 <th className="px-6 py-4">Expert</th>
                 <th className="px-6 py-4">Concept</th>
                 <th className="px-6 py-4">Consensus</th>
-                <th className="px-6 py-4">Strengths</th>
-                <th className="px-6 py-4">Risks</th>
+                <th className="px-6 py-4">Failure Risks</th>
+                <th className="px-6 py-4">Market State</th>
                 <th className="px-6 py-4 text-right">Draft</th>
               </tr>
             </thead>
@@ -49,11 +49,11 @@ export default function RealTimeFeedbackTable() {
                       </span>
                     )}
                   </td>
-                  <td className="px-6 py-4 max-w-[200px] truncate text-on-surface/70 font-medium italic" title={f.likeFeedback}>
-                    {f.likeFeedback || "-"}
+                  <td className="px-6 py-4 max-w-[200px] truncate text-on-surface/70 font-medium italic" title={f.reasonsForFailure}>
+                    {f.reasonsForFailure || "-"}
                   </td>
-                  <td className="px-6 py-4 max-w-[200px] truncate text-on-surface/70 font-medium italic" title={f.dislikeFeedback}>
-                    {f.dislikeFeedback || "-"}
+                  <td className="px-6 py-4 max-w-[200px] truncate text-on-surface/70 font-medium italic" title={f.existingSolutions}>
+                    {f.existingSolutions || "-"}
                   </td>
                   <td className="px-6 py-4 text-right">
                     <button className="text-primary opacity-0 group-hover:opacity-100 transition-opacity p-2">
@@ -136,29 +136,32 @@ export default function RealTimeFeedbackTable() {
 
                 <div className="space-y-10">
                   <div className="space-y-3 relative">
-                    <div className="flex items-center gap-2 text-tertiary">
-                      <h4 className="text-[10px] font-bold uppercase tracking-[0.2em]">01. Merits</h4>
+                    <div className="flex items-center gap-2 text-primary">
+                      <Ban size={14} />
+                      <h4 className="text-[10px] font-bold uppercase tracking-[0.2em]">01. Why will it not work?</h4>
                     </div>
-                    <div className="text-sm leading-relaxed text-on-surface font-medium border-l border-outline-variant pl-6 py-1">
-                      {selectedFeedback.likeFeedback || "No merits documented."}
+                    <div className="text-sm leading-relaxed text-on-surface font-medium border-l border-outline-variant pl-6 py-1 italic">
+                      {selectedFeedback.reasonsForFailure || "No failure risks documented."}
                     </div>
                   </div>
 
                   <div className="space-y-3 relative">
-                    <div className="flex items-center gap-2 text-primary">
-                      <h4 className="text-[10px] font-bold uppercase tracking-[0.2em]">02. Exposure</h4>
+                    <div className="flex items-center gap-2 text-tertiary">
+                      <Search size={14} />
+                      <h4 className="text-[10px] font-bold uppercase tracking-[0.2em]">02. Current Market Solutions</h4>
                     </div>
-                    <div className="text-sm leading-relaxed text-on-surface font-medium border-l border-outline-variant pl-6 py-1">
-                      {selectedFeedback.dislikeFeedback || "No exposure risks documented."}
+                    <div className="text-sm leading-relaxed text-on-surface font-medium border-l border-outline-variant pl-6 py-1 italic">
+                      {selectedFeedback.existingSolutions || "No existing solutions documented."}
                     </div>
                   </div>
 
                   <div className="space-y-3 relative">
                     <div className="flex items-center gap-2 text-on-surface">
-                      <h4 className="text-[10px] font-bold uppercase tracking-[0.2em]">03. Strategy Annotations</h4>
+                      <HelpCircle size={14} />
+                      <h4 className="text-[10px] font-bold uppercase tracking-[0.2em]">03. Hidden Hurdles</h4>
                     </div>
                     <div className="text-sm leading-relaxed text-on-surface bg-surface-container p-6 border border-outline-variant shadow-inner font-medium">
-                      {selectedFeedback.comments || "No strategy annotations provided."}
+                      {selectedFeedback.hiddenHurdles || "No hidden hurdles identified."}
                     </div>
                   </div>
                 </div>

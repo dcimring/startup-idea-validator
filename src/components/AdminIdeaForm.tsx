@@ -152,7 +152,7 @@ export default function AdminIdeaForm({
                         />
                       </div>
                       <div className="sketched-underline pb-1">
-                        <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mb-2">04. The Strategy</label>
+                        <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mb-2">04. The Solution</label>
                         <textarea
                           value={pitch}
                           onChange={(e) => setPitch(e.target.value)}

@@ -80,3 +80,16 @@
   @apply bg-primary/5;
   transform: rotate(-1deg);
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.content-fade {
+  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
