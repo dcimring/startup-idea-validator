@@ -17,6 +17,7 @@ export default function AdminIdeaForm({
 }) {
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
+  const [problem, setProblem] = useState("");
   const [pitch, setPitch] = useState("");
   const [features, setFeatures] = useState<string[]>([""]);
   
@@ -27,11 +28,13 @@ export default function AdminIdeaForm({
     if (initialIdea) {
       setTitle(initialIdea.title);
       setSubtitle(initialIdea.subtitle || "");
+      setProblem(initialIdea.problem || "");
       setPitch(initialIdea.pitch);
       setFeatures(initialIdea.features.length > 0 ? initialIdea.features : [""]);
     } else {
       setTitle("");
       setSubtitle("");
+      setProblem("");
       setPitch("");
       setFeatures([""]);
     }
@@ -46,6 +49,7 @@ export default function AdminIdeaForm({
         id: initialIdea._id,
         title,
         subtitle,
+        problem,
         pitch,
         features: cleanFeatures,
         isActive: initialIdea.isActive,
@@ -54,6 +58,7 @@ export default function AdminIdeaForm({
       await addIdea({
         title,
         subtitle,
+        problem,
         pitch,
         features: cleanFeatures,
         isActive: true,
@@ -137,19 +142,29 @@ export default function AdminIdeaForm({
                         />
                       </div>
                       <div className="sketched-underline pb-1">
-                        <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mb-2">03. The Pitch</label>
+                        <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mb-2">03. The Problem</label>
+                        <textarea
+                          value={problem}
+                          onChange={(e) => setProblem(e.target.value)}
+                          className="w-full bg-transparent outline-none text-sm font-medium h-24 resize-none leading-relaxed placeholder:text-outline-variant italic"
+                          placeholder="What pain point are we addressing?"
+                          required
+                        />
+                      </div>
+                      <div className="sketched-underline pb-1">
+                        <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mb-2">04. The Strategy</label>
                         <textarea
                           value={pitch}
                           onChange={(e) => setPitch(e.target.value)}
-                          className="w-full bg-transparent outline-none text-sm font-medium h-32 resize-none leading-relaxed placeholder:text-outline-variant italic"
-                          placeholder="Describe the problem and solution..."
+                          className="w-full bg-transparent outline-none text-sm font-medium h-24 resize-none leading-relaxed placeholder:text-outline-variant italic"
+                          placeholder="Describe the solution..."
                           required
                         />
                       </div>
                     </div>
 
                     <div className="space-y-6">
-                      <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary">04. Specifications</label>
+                      <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary">05. Specifications</label>
                       <div className="max-h-[300px] overflow-y-auto pr-4 space-y-4 custom-scrollbar">
                         {features.map((feature, index) => (
                           <div key={index} className="flex gap-3 group items-center">

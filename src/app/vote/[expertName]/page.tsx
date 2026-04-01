@@ -146,17 +146,33 @@ export default function ExpertVotePage() {
                 </h2>
               </div>
               
-              <p className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-primary/60 mb-10 border-b border-outline-variant/10 pb-4 inline-block">
+              <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary/60 mb-8 border-b border-outline-variant/10 pb-4 inline-block">
                 {currentIdea.subtitle}
               </p>
               
-              <p className="text-xl md:text-2xl text-on-surface mb-12 leading-relaxed italic font-medium border-l-2 border-primary/20 pl-8 py-2">
-                &ldquo;{currentIdea.pitch}&rdquo;
-              </p>
+              <div className="space-y-10 mb-12">
+                <div className="space-y-3">
+                  <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary/40 flex items-center gap-2">
+                    01. The Problem
+                  </h3>
+                  <p className="text-lg text-on-surface leading-relaxed italic font-medium border-l border-primary/10 pl-6 py-1">
+                    &ldquo;{currentIdea.problem || "No problem statement provided."}&rdquo;
+                  </p>
+                </div>
+
+                <div className="space-y-3">
+                  <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary flex items-center gap-2">
+                    02. The Strategy
+                  </h3>
+                  <p className="text-xl md:text-2xl text-on-surface leading-relaxed font-bold tracking-tight">
+                    {currentIdea.pitch}
+                  </p>
+                </div>
+              </div>
               
               <div className="space-y-6 mb-16">
                 <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary flex items-center gap-2">
-                  <FileText size={12} /> Key Specifications
+                  <FileText size={12} /> 03. Key Specifications
                 </h3>
                 <ul className="space-y-4">
                   {currentIdea.features.map((feature, i) => (

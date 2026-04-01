@@ -5,6 +5,7 @@ export const add = mutation({
   args: {
     title: v.string(),
     subtitle: v.optional(v.string()),
+    problem: v.optional(v.string()),
     pitch: v.string(),
     features: v.array(v.string()),
     isActive: v.boolean(),
@@ -19,6 +20,7 @@ export const update = mutation({
     id: v.id("ideas"),
     title: v.string(),
     subtitle: v.optional(v.string()),
+    problem: v.optional(v.string()),
     pitch: v.string(),
     features: v.array(v.string()),
     isActive: v.boolean(),

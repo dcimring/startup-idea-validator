@@ -5,6 +5,7 @@ export default defineSchema({
   ideas: defineTable({
     title: v.string(),
     subtitle: v.optional(v.string()),
+    problem: v.optional(v.string()),
     pitch: v.string(),
     features: v.array(v.string()),
     isActive: v.boolean(),

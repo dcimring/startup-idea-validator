@@ -36,6 +36,7 @@ export default function AdminIdeaList({ onEdit }: { onEdit: (idea: any) => void 
                 id: idea._id, 
                 title: idea.title, 
                 subtitle: idea.subtitle,
+                problem: idea.problem,
                 pitch: idea.pitch, 
                 features: idea.features, 
                 isActive: !idea.isActive 
