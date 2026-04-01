@@ -295,20 +295,20 @@ export default function ExpertVotePage() {
 
               <div className="space-y-12">
                 <div className="sketched-underline pb-1">
-                  <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mb-3">Related Concepts</label>
+                  <label className="block text-xs font-bold uppercase tracking-[0.2em] text-tertiary mb-3">Related Concepts</label>
                   <textarea
                     value={relatedIdeas}
                     onChange={(e) => setRelatedIdeas(e.target.value)}
-                    className="w-full bg-transparent outline-none text-sm font-medium h-32 resize-none leading-relaxed placeholder:text-outline-variant italic"
+                    className="w-full bg-transparent outline-none text-base font-medium h-32 resize-none leading-relaxed placeholder:text-outline-variant italic"
                     placeholder="Are there other gaps in this market we should explore?"
                   />
                 </div>
                 <div className="sketched-underline pb-1">
-                  <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mb-3">General Directives</label>
+                  <label className="block text-xs font-bold uppercase tracking-[0.2em] text-tertiary mb-3">General Directives</label>
                   <textarea
                     value={generalFeedback}
                     onChange={(e) => setGeneralFeedback(e.target.value)}
-                    className="w-full bg-transparent outline-none text-sm font-medium h-32 resize-none leading-relaxed placeholder:text-outline-variant italic"
+                    className="w-full bg-transparent outline-none text-base font-medium h-32 resize-none leading-relaxed placeholder:text-outline-variant italic"
                     placeholder="Any overarching feedback for our tactical roadmap?"
                   />
                 </div>
