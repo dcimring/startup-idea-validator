@@ -16,7 +16,40 @@ export default function RealTimeFeedbackTable() {
 
   return (
     <div className="relative flex-1 flex flex-col min-h-0">
-      <div className="bg-surface-container-lowest border border-outline-variant shadow-sm overflow-hidden">
+      {/* Mobile Card Feed */}
+      <div className="md:hidden space-y-4 pb-24">
+        {feedbacks.map((f) => (
+          <motion.div
+            key={f._id}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => setSelectedFeedback(f)}
+            className="bg-surface-container-lowest p-6 border border-outline-variant asymmetric-card shadow-sm active:bg-surface-container transition-colors"
+          >
+            <div className="flex justify-between items-start mb-4">
+              <div>
+                <div className="text-[8px] font-bold uppercase tracking-[0.2em] text-tertiary mb-1">Source: {f.expertName}</div>
+                <h4 className="font-display font-bold text-on-surface uppercase tracking-tight italic">
+                  {f.ideaTitle}
+                </h4>
+              </div>
+              <div className={`px-2 py-0.5 border text-[8px] font-bold uppercase tracking-[0.1em] ${f.vote ? 'border-tertiary/20 text-tertiary' : 'border-primary/20 text-primary'}`}>
+                {f.vote ? 'VALID' : 'RISK'}
+              </div>
+            </div>
+            
+            <div className="text-xs text-on-surface/60 font-medium italic line-clamp-2 mb-4 leading-relaxed">
+              {f.reasonsForFailure || "No failure risks documented."}
+            </div>
+
+            <div className="flex items-center gap-2 text-primary font-bold text-[8px] uppercase tracking-[0.2em]">
+              View Full Briefing <ChevronRight size={10} />
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Desktop Table View */}
+      <div className="hidden md:block bg-surface-container-lowest border border-outline-variant shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead className="bg-surface-container text-tertiary text-[10px] font-bold uppercase tracking-[0.2em]">
@@ -64,13 +97,14 @@ export default function RealTimeFeedbackTable() {
               ))}
             </tbody>
           </table>
-          {feedbacks.length === 0 && (
-            <div className="p-12 text-center text-tertiary italic text-xs uppercase tracking-widest">
-              Awaiting expert evaluation data...
-            </div>
-          )}
         </div>
       </div>
+      
+      {feedbacks.length === 0 && (
+        <div className="p-12 text-center text-tertiary italic text-xs uppercase tracking-widest bg-surface-container-lowest border border-outline-variant">
+          Awaiting expert evaluation data...
+        </div>
+      )}
 
       {/* Intelligence Drawer (Vellum Style) */}
       <AnimatePresence>
