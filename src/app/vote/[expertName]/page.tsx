@@ -91,12 +91,12 @@ export default function ExpertVotePage() {
   };
 
   return (
-    <div className="min-h-screen bg-surface flex flex-col items-center relative overflow-x-hidden pb-24 kinetic-texture">
+    <div className="min-h-screen bg-surface flex flex-col items-center relative overflow-x-hidden pb-32 md:pb-48 kinetic-texture">
       {/* Editorial Header */}
-      <header className="w-full max-w-5xl px-8 py-10 md:py-16 flex items-center justify-between z-10 shrink-0">
+      <header className="w-full max-w-[1600px] px-8 py-8 md:py-12 flex items-center justify-between z-10 shrink-0">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 bg-primary flex items-center justify-center shadow-xl">
-            <PenTool className="text-on-primary" size={24} />
+          <div className="w-10 h-10 bg-primary flex items-center justify-center shadow-xl">
+            <PenTool className="text-on-primary" size={20} />
           </div>
           <div className="monolith-label mb-0 text-[10px]">
             INTELLIGENCE <span className="italic block text-[8px] tracking-[0.2em] mt-0.5 text-white/20">PROTOCOL v26</span>
@@ -107,7 +107,7 @@ export default function ExpertVotePage() {
         </div>
       </header>
 
-      <main className="w-full max-w-5xl px-8 flex-1 flex flex-col min-h-0">
+      <main className="w-full max-w-[1600px] px-8 flex-1 flex flex-col min-h-0">
         <AnimatePresence mode="wait">
           {phase === "intro" && (
             <motion.div
@@ -144,78 +144,85 @@ export default function ExpertVotePage() {
               exit="exit"
               className="flex-1 flex flex-col min-h-0"
             >
-              {/* Draft Label */}
-              <div className="flex items-center justify-between mb-12 shrink-0">
-                <div className="bg-primary px-6 py-2 shadow-lg">
-                  <span className="text-[10px] font-black text-on-primary uppercase tracking-[0.4em]">
-                    PHASE 0{currentIndex + 1} // 0{ideas.length}
-                  </span>
-                </div>
-              </div>
-
-              {/* Editorial Concept View */}
-              <div className="flex-1 flex flex-col md:flex-row gap-12 md:gap-24 min-h-0 overflow-hidden">
-                {/* Left Col: The Abstract */}
-                <div className="md:w-1/2 flex flex-col gap-10 shrink-0">
+              {/* Desktop Intelligence Grid */}
+              <div className="flex-1 grid grid-cols-1 md:grid-cols-[1.2fr_2.5fr_1fr] gap-12 md:gap-20 min-h-0">
+                
+                {/* Column 01: The Identifier */}
+                <div className="flex flex-col gap-10 md:border-r md:border-white/5 md:pr-12">
+                  <div className="bg-primary px-6 py-2 shadow-lg self-start">
+                    <span className="text-[10px] font-black text-on-primary uppercase tracking-[0.4em]">
+                      PHASE 0{currentIndex + 1} // 0{ideas.length}
+                    </span>
+                  </div>
+                  
                   <div>
-                    <h2 className="text-5xl md:text-7xl font-display font-black text-white leading-[0.85] tracking-tighter uppercase mb-6 italic">
+                    <h2 className="text-5xl md:text-6xl font-display font-black text-white leading-[0.85] tracking-tighter uppercase mb-4 italic">
                       {currentIdea.title}
                     </h2>
-                    <p className="monolith-label text-sm tracking-tight italic text-white/60">
+                    <p className="monolith-label text-xs tracking-tight italic text-white/60">
                       {currentIdea.subtitle}
                     </p>
                   </div>
 
-                  <div className="space-y-6">
-                    <h3 className="monolith-label text-[9px]">01. CONTEXTUAL ANALYSIS</h3>
-                    <div className="text-xl md:text-3xl leading-tight text-white font-black uppercase tracking-tighter">
-                      {currentIdea.problem}
+                  <div className="mt-auto hidden md:block">
+                    <div className="monolith-label text-[8px] opacity-20">VERDICT_REQUIRED</div>
+                    <div className="text-[10px] font-black uppercase tracking-[0.3em] text-white/10 leading-relaxed">
+                      Please analyze the core architecture and provide a strategic consensus.
                     </div>
                   </div>
                 </div>
 
-                {/* Right Col: The Vision */}
-                <div className="flex-1 flex flex-col gap-12 min-h-0">
+                {/* Column 02: The Core */}
+                <div className="flex flex-col gap-12 min-h-0 md:overflow-y-auto md:no-scrollbar">
                   <div className="space-y-6">
-                    <h3 className="monolith-label text-[9px]">02. PROPOSED SOLUTION</h3>
-                    <div className="text-2xl md:text-4xl font-display font-black text-primary leading-tight tracking-tighter uppercase italic">
+                    <h3 className="monolith-label text-[9px]">01. CONTEXTUAL ANALYSIS</h3>
+                    <div className="text-xl md:text-2xl leading-tight text-white font-black uppercase tracking-tighter">
+                      {currentIdea.problem}
+                    </div>
+                  </div>
+
+                  <div className="space-y-6 bg-surface-container-high p-8 md:p-12 border-l-[12px] border-primary ambient-shadow">
+                    <h3 className="monolith-label text-[9px] text-primary">02. PROPOSED SOLUTION</h3>
+                    <div className="text-2xl md:text-4xl font-display font-black text-white leading-tight tracking-tighter uppercase italic">
                       {currentIdea.pitch}
                     </div>
                   </div>
-                  <div className="space-y-6 flex-1 min-h-0 flex flex-col">
-                    <h3 className="monolith-label text-[9px] flex items-center gap-3">
-                      <Sparkles size={14} /> 03. TACTICAL SPECS
-                    </h3>
-                    <div className="flex flex-wrap gap-4 overflow-y-auto no-scrollbar pb-24">
-                      {currentIdea.features.map((feature, i) => (
-                        <div key={i} className="bg-surface-container-highest px-5 py-2.5 border-l-4 border-white/5 shrink-0 ambient-shadow">
-                          <span className="text-[10px] font-black text-white uppercase tracking-widest">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
+                </div>
+
+                {/* Column 03: The Specs */}
+                <div className="flex flex-col gap-8 md:border-l md:border-white/5 md:pl-12">
+                  <h3 className="monolith-label text-[9px] flex items-center gap-3">
+                    <Sparkles size={14} /> 03. TACTICAL SPECS
+                  </h3>
+                  <div className="flex flex-col gap-3">
+                    {currentIdea.features.map((feature, i) => (
+                      <div key={i} className="bg-surface-container-highest px-4 py-3 border-l-4 border-white/5 shrink-0 ambient-shadow">
+                        <span className="text-[9px] font-black text-white uppercase tracking-widest leading-none block">{feature}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
 
               {/* Fixed-Position Voting */}
-              <div className="fixed bottom-0 left-0 w-full p-8 md:p-12 flex justify-center pointer-events-none z-30">
+              <div className="fixed bottom-0 left-0 w-full p-0 md:p-12 flex justify-center pointer-events-none z-30">
                 <motion.div 
                   initial={{ y: 100, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.5, type: "spring", stiffness: 200, damping: 25 }}
-                  className="bg-surface-container/90 backdrop-blur-2xl p-4 flex gap-6 pointer-events-auto shadow-2xl max-w-2xl w-full border-t border-white/5"
+                  className="bg-surface-container/95 backdrop-blur-2xl p-4 md:p-6 flex gap-4 md:gap-10 pointer-events-auto shadow-[0_-10px_40px_rgba(0,0,0,0.5)] md:shadow-2xl max-w-4xl w-full border-t border-white/10"
                 >
                   <button
                     onClick={() => handleVote(true)}
-                    className="flex-1 high-voltage-button py-6 text-lg"
+                    className="flex-1 high-voltage-button py-4 md:py-6 text-sm md:text-lg"
                   >
-                    Deploy <ThumbsUp size={24} className="ml-3" />
+                    Deploy <ThumbsUp size={18} className="ml-2 md:ml-3" />
                   </button>
                   <button
                     onClick={() => handleVote(false)}
-                    className="flex-1 secondary-button py-6 text-lg border-white/10 hover:border-white/30"
+                    className="flex-1 secondary-button py-4 md:py-6 text-sm md:text-lg border-white/10 hover:border-white/30"
                   >
-                    Abort <ThumbsDown size={24} className="ml-3" />
+                    Abort <ThumbsDown size={18} className="ml-2 md:ml-3" />
                   </button>
                 </motion.div>
               </div>
