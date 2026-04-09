@@ -1,82 +1,89 @@
-```markdown
-# Design System: The Architect’s Draft
+# Design System: High-Impact Athletic Editorial
 
-## 1. Overview & Creative North Star: "The Living Manuscript"
-This design system rejects the clinical coldness of traditional SaaS interfaces in favor of **The Living Manuscript**. Our North Star is the intersection of a high-end architect’s vellum sketch and a modern editorial layout.
+## 1. Overview & Creative North Star
+**Creative North Star: "The Kinetic Monolith"**
 
-The goal is to evoke the feeling of a "work in progress" that is simultaneously masterful and precise. We break the "template" look by utilizing intentional asymmetry—where elements are slightly offset as if placed by hand—and overlapping layers that mimic physical sheets of paper. This system prioritizes tactility, using "ink on paper" as its primary metaphor to create a space where startup founders feel they are *crafting* their pitch, not just filling out forms.
+This design system moves away from the polite, rounded aesthetics of standard SaaS platforms and embraces the raw, aggressive energy of performance athletics. The "Kinetic Monolith" is defined by sharp 0px corners, extreme typographic contrast, and an uncompromising color palette. It breaks the "template" feel through **Intentional Asymmetry**: large blocks of `primary_fixed` (Athletic Yellow) should overlap monochromatic imagery, and text should bleed across color boundaries to create a sense of forward motion. The layout isn't a grid to be filled; it is a canvas of high-tension surfaces where negative space is as heavy as the content.
 
----
+## 2. Colors & Surface Logic
 
-## 2. Colors & Surface Philosophy
-The palette is rooted in organic, warm neutrals that reduce eye strain and provide a premium "heavy stock" paper feel.
+### The Palette
+The core of this system is the tension between `#0e0e0e` (Deep Black) and `#fde400` (Athletic Yellow).
+*   **Background (`#0e0e0e`)**: The void. All content emerges from this depth.
+*   **Primary (`#fde400`)**: The "High-Voltage" accent. Used for high-impact callouts and primary actions.
+*   **On-Surface (`#ffffff`)**: Pure white for maximum readability against the dark void.
 
-- **Background & Base:** Use `surface` (`#fbf9f4`) as your primary canvas.
-- **The "No-Line" Rule:** Sectioning must never be achieved through standard 1px solid gray lines. Instead, use background shifts. A side panel should transition from `surface` to `surface-container-low` (`#f5f4ed`) to define its boundary.
-- **Surface Hierarchy & Nesting:** Treat the interface as stacked physical sheets.
-- **Base:** `surface`
-- **Inlaid Sections:** `surface-container`
-- **Floating "Notes":** `surface-container-lowest` (`#ffffff`) to create a "bright paper" highlight.
-- **The "Ink & Graphite" Rule:** Primary actions and text use `primary` (`#4d6169`) and `on-surface` (`#31332c`). These should feel like high-quality pigment ink, not digital black.
-- **Signature Textures:** Apply a subtle grain overlay (2-3% opacity) across the `background` to break the digital flatness. For main CTAs, use a subtle gradient from `primary` to `primary_dim` to simulate the slight pooling of ink at the edge of a stroke.
+### The "No-Line" Rule
+Traditional 1px borders are strictly prohibited for sectioning. They feel "thin" and "digital." In this system, boundaries are created through:
+1.  **Background Shifts**: Move from `surface` to `surface_container_low` (`#131313`) to define a new content area.
+2.  **Color Blocking**: A full-bleed block of `primary` serves as a natural separator between two black sections.
+3.  **Hard Edges**: Use high-contrast imagery meeting solid color blocks to define structure.
 
----
+### Surface Hierarchy & Nesting
+Treat the UI as stacked plates of industrial material. 
+*   **Nesting Logic**: To highlight a card or featured section, do not use a border. Instead, place a `surface_container_highest` (`#262626`) element inside a `surface_container` (`#191919`) area. This "tonal layering" creates a sophisticated depth that feels architectural rather than "web-like."
 
-## 3. Typography: The Human/Machine Duality
-We use a high-contrast typographic pairing to balance professional structure with creative ideation.
+### The "Glass & Gradient" Rule
+While the brand is brutalist, "The Kinetic Monolith" requires polish. 
+*   **Glassmorphism**: For floating elements like navigation bars or sticky CTAs, use `surface_container_low` at 80% opacity with a `backdrop-filter: blur(20px)`. This allows the high-impact yellow blocks to "glow" through the UI as the user scrolls.
+*   **Signature Textures**: On large Primary CTAs, use a subtle linear gradient from `primary` (`#fde400`) to `primary_dim` (`#edd600`) at a 45-degree angle to give the yellow "weight" and professional density.
 
-- **Display & Headlines (Space Grotesk):** This monospaced-leaning sans-serif represents the "structure." Use `display-lg` for hero statements and `headline-md` for section headers. Its geometric nature feels like a blueprint.
-- **Body & Titles (Work Sans):** Use `body-lg` for readability. Work Sans provides a clean, neutral balance that doesn't compete with the "draft" elements.
-- **The "Annotated" Feel:** Use `label-md` in `tertiary` (`#575e78`) for micro-copy or helper text. This should feel like a designer’s side-note scribbled in the margins.
+## 3. Typography
 
----
+### Headline Philosophy: The Lexend Heavyweight
+*   **Display & Headline (Lexend)**: Must always be **Uppercase**. The tracking should be tight (-0.02em to -0.05em) to create a "wall of text" effect that mirrors the intensity of the Hyrox branding. 
+*   **Body & Title (Inter)**: Designed for maximum utility. Inter provides a technical, clean counter-balance to the aggressive headlines.
 
-## 4. Elevation & Depth: Tonal Layering
-Traditional box shadows are forbidden. We use "Ambient Depth" to simulate physical paper.
+### Typographic Hierarchy
+*   **Display-LG (3.5rem)**: Reserved for hero statements. Overlap these with imagery for an editorial look.
+*   **Headline-MD (1.75rem)**: Used for section headers. Frequently placed inside solid `primary` color blocks using `on_primary_container` (`#5c5200`) text for a "label" aesthetic.
+*   **Body-LG (1rem)**: The workhorse. High line-height (1.6) to ensure the dark background doesn't "crush" the white text.
 
-- **The Layering Principle:** To lift a card, place a `surface-container-lowest` object on a `surface-container` background. The color shift provides the "lift."
-- **Ambient Shadows:** For floating modals or "sketched" popovers, use an extra-diffused shadow: `box-shadow: 0 20px 40px rgba(49, 51, 44, 0.06);`. The shadow color must be a derivative of `on-surface`, never pure black.
-- **The "Ghost Border":** If a boundary is required for accessibility, use the `outline-variant` token at 15% opacity. It should look like a faint pencil guideline, not a container.
-- **Glassmorphism:** For navigation overlays, use `surface` at 80% opacity with a `backdrop-blur` of 12px. This mimics the look of translucent tracing paper.
+## 4. Elevation & Depth
 
----
+### The Layering Principle
+Depth is achieved via **Tonal Stacking**. 
+*   Base: `surface` (`#0e0e0e`)
+*   Section: `surface_container_low` (`#131313`)
+*   Component: `surface_container_high` (`#1f1f1f`)
+This creates a natural lift without the "dirty" look of standard grey shadows.
+
+### Ambient Shadows
+Shadows are rarely used. When essential (e.g., a floating Action Button), use an **Ambient Shadow**:
+*   `box-shadow: 0 20px 40px rgba(0,0,0,0.4);`
+*   Never use "Hard" shadows. The shadow should feel like a soft occlusion of light, not a drop-shadow effect.
+
+### The "Ghost Border" Fallback
+If UI elements (like input fields) need more definition, use a **Ghost Border**:
+*   `outline-variant` (`#484848`) at 20% opacity. This provides just enough edge for accessibility without breaking the monolithic aesthetic.
 
 ## 5. Components
 
-### Buttons: The Sketched Box
-- **Primary:** A solid fill of `primary` (`#4d6169`). The corners should use the `sm` (`0.125rem`) roundedness to look hand-cut. Apply a custom `border-image` that mimics a slightly shaky ink stroke.
-- **Secondary:** A "Ghost" button with an irregular border (use an SVG mask for a hand-drawn look) using the `outline` token.
-- **States:** On hover, buttons should subtly shift in "tilt" (1-degree rotation) to mimic a physical object being touched.
+### Buttons
+*   **Primary**: Solid `primary` (`#fde400`) background, `on_primary` (`#655b00`) text, 0px border-radius. All caps Lexend. Hover state: `primary_dim`.
+*   **Secondary**: `outline` token at 20% opacity for the border. White text. 0px border-radius.
+*   **Tertiary**: Text-only, uppercase, with a 2px `primary` underline that expands on hover.
 
-### Cards & Containers
-- **Forbid Dividers:** Never use `
-` tags. Use `spacing-8` (2.75rem) to create clear mental breaks through whitespace.
+### Cards & Sections
+*   **Rule**: No divider lines. Use `surface_container` shifts.
+*   **Imagery**: Use high-contrast, desaturated (black and white) photography. To integrate imagery, apply a `primary` color multiply filter or overlay a yellow block `(#fde400)` at the bottom corner to house the card title.
 
-- **Asymmetry:** Give cards a random `border-radius` variance (e.g., top-left: 2px, top-right: 4px, bottom-left: 1px, bottom-right: 3px) to reinforce the "hand-cut paper" aesthetic.
+### Input Fields
+*   **Style**: Bottom-border only or solid `surface_container_highest` background. 0px radius.
+*   **Focus State**: The bottom border transitions to 2px solid `primary`.
 
-### Input Fields: The Underline
-- Abandon the four-sided box. Use a "ruled paper" approach: a single bottom border using `outline-variant`. When focused, the line transitions to `primary` and thickens slightly like a bold ink stroke.
+### Impact Blocks (Unique Component)
+*   A specific component for "The Kinetic Monolith." A full-width container of `primary` color with `display-md` text. It acts as a visual "speed bump" to break up long scrolling sections.
 
-### Specialized Component: The "Margin Note"
-- A specific tooltip variant positioned in the far right/left gutters. Uses `label-sm` in `secondary` color, acting as a "peer review" or "mentor tip" within the pitch tool.
-
----
-
-## 6. Do’s and Don’ts
+## 6. Do's and Don'ts
 
 ### Do:
-- **Use White Space as a Luxury:** Leverage the `20` and `24` spacing tokens to let the "paper" breathe.
-- **Embrace Imperfection:** If an icon is 1px "off-center" visually but feels right, leave it. The system should feel human.
-- **Layer Surfaces:** Use `surface-container-highest` for the most important interactive "work areas" to draw the eye.
+*   **Use 0px Radius Everywhere**: Every corner must be sharp. This conveys strength and precision.
+*   **Bleed Imagery**: Let photos take up 100% of the viewport width or height in specific sections.
+*   **Contrast is King**: Ensure all yellow-on-black or white-on-black text meets WCAG AA standards.
 
-### Don’t:
-- **Don't Use Sharp Gradients:** No high-contrast metallic or neon gradients. Stay within the matte, "ink-and-paper" tonal range.
-- **Don't Use 1px Solid #000:** It breaks the "Architect's Draft" illusion. Always use the `outline` or `primary` tokens.
-- **Don't Over-Animate:** Transitions should be "Snappy but Soft" (e.g., `200ms ease-out`). Avoid bouncy, "bubbly" animations that feel too "app-like." We are building a professional tool.
-
----
-
-## 7. Interaction Model: The Tactile Response
-Interaction should feel like moving paper on a desk.
-- **Draggable Elements:** When a user grabs a component, increase the shadow diffusion and add a 2-degree rotation.
-- **Success States:** Use `tertiary` (muted blue-green) rather than a loud, "digital" green. Success is a subtle ink-stamp, not a flashing neon sign.```
+### Don't:
+*   **No Rounded Corners**: Any radius above 0px will immediately dilute the brand's "High-Impact" persona.
+*   **No Pastel Colors**: Stick strictly to the defined palette. Adding soft blues or greens will break the "Athletic Brutalist" feel.
+*   **No Thin Borders**: Avoid using `outline` at 100% opacity; it creates a "boxed-in" look that feels dated. Use background shifts instead.
+*   **No Centered Body Text**: Keep body text left-aligned to maintain the technical, editorial structure of the system.
