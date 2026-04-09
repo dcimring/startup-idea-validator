@@ -145,7 +145,7 @@ export default function ExpertVotePage() {
               className="flex-1 flex flex-col min-h-0"
             >
               {/* Desktop Intelligence Grid */}
-              <div className="flex-1 grid grid-cols-1 md:grid-cols-[1.2fr_2.5fr_1fr] gap-12 md:gap-20 min-h-0">
+              <div className="flex-1 grid grid-cols-1 md:grid-cols-[320px_1fr_280px] gap-12 md:gap-20 min-h-0">
                 
                 {/* Column 01: The Identifier */}
                 <div className="flex flex-col gap-10 md:border-r md:border-white/5 md:pr-12">
@@ -156,7 +156,7 @@ export default function ExpertVotePage() {
                   </div>
                   
                   <div>
-                    <h2 className="text-5xl md:text-6xl font-display font-black text-white leading-[0.85] tracking-tighter uppercase mb-4 italic">
+                    <h2 className="text-5xl md:text-5xl font-display font-black text-white leading-[0.85] tracking-tighter uppercase mb-4 italic">
                       {currentIdea.title}
                     </h2>
                     <p className="monolith-label text-xs tracking-tight italic text-white/60">
