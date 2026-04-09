@@ -1,18 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Work_Sans } from "next/font/google";
+import { Lexend, Inter } from "next/font/google";
 import "./globals.css";
 import { ConvexClientProvider } from "@/components/ConvexClientProvider";
 
-const spaceGrotesk = Space_Grotesk({
+const lexend = Lexend({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["400", "700"],
+  weight: ["400", "700", "800", "900"],
 });
 
-const workSans = Work_Sans({
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-body",
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const viewport: Viewport = {
@@ -23,8 +23,8 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Startup Idea Validator",
-  description: "Crafting concepts with precision.",
+  title: "Startup Idea Validator | High-Impact",
+  description: "Aggressive concept validation.",
 };
 
 export default function RootLayout({
@@ -35,9 +35,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${spaceGrotesk.variable} ${workSans.variable} antialiased bg-[#fbf9f4] text-[#31332c] min-h-screen font-body`}
+        className={`${lexend.variable} ${inter.variable} antialiased bg-[#0e0e0e] text-[#ffffff] min-h-screen font-body`}
       >
-        <div className="paper-grain" />
         <ConvexClientProvider>{children}</ConvexClientProvider>
       </body>
     </html>

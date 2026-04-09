@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { Plus, X, Sparkles, ArrowRight, PenTool } from "lucide-react";
+import { Plus, X, ArrowRight, PenTool } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function AdminIdeaForm({ 
@@ -86,96 +86,96 @@ export default function AdminIdeaForm({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-on-surface/10 backdrop-blur-md z-50 flex items-center justify-center p-2 md:p-4"
+            className="fixed inset-0 bg-black/80 backdrop-blur-xl z-50 flex items-center justify-center p-4 md:p-8"
           >
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, scale: 0.98, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.98, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="asymmetric-card bg-surface-container-lowest w-full max-w-2xl border border-outline-variant shadow-2xl relative overflow-hidden flex flex-col max-h-[95vh] md:max-h-none"
+              className="bg-surface-container-low w-full max-w-4xl border-none shadow-2xl relative overflow-hidden flex flex-col max-h-[95vh] rounded-none border-l-[8px] border-primary"
             >
-              <div className="flex-1 overflow-y-auto custom-scrollbar">
-                <div className="p-6 md:p-10">
-                  <div className="flex items-center justify-between mb-8 md:mb-10">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-primary/10 rounded-sm flex items-center justify-center border border-primary/20">
-                        <PenTool className="text-primary" size={20} />
+              <div className="flex-1 overflow-y-auto no-scrollbar">
+                <div className="p-8 md:p-12">
+                  <div className="flex items-center justify-between mb-10">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-primary flex items-center justify-center shadow-lg">
+                        <PenTool className="text-on-primary" size={24} />
                       </div>
                       <div>
-                        <h2 className="text-3xl font-display text-on-surface leading-none">
-                          {initialIdea ? 'Edit' : 'New'} <span className="text-primary italic">Concept</span>
+                        <h2 className="text-3xl font-display font-black text-white leading-none tracking-tighter uppercase italic">
+                          {initialIdea ? 'Edit' : 'New'} <span className="text-primary not-italic">Concept</span>
                         </h2>
-                        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mt-1.5">Drafting Workspace</p>
+                        <p className="monolith-label mt-1 mb-0">Operational Protocol</p>
                       </div>
                     </div>
                     <button
                       onClick={onClose}
-                      className="p-2 hover:bg-black/5 rounded-full transition-colors text-tertiary"
+                      className="p-2 hover:bg-white/5 transition-colors text-white/20 hover:text-white"
                     >
-                      <X size={24} />
+                      <X size={28} />
                     </button>
                   </div>
 
                   <form onSubmit={handleSubmit} className="space-y-10">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                       <div className="space-y-8">
-                        <div className="sketched-underline pb-1">
-                          <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mb-2">01. Project Title</label>
+                        <div>
+                          <label className="monolith-label">01. Identifier</label>
                           <input
                             type="text"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
-                            className="w-full bg-transparent outline-none text-lg font-display font-bold placeholder:text-outline-variant"
-                            placeholder="PropTech AI..."
+                            className="monolith-input text-lg font-black uppercase tracking-tight"
+                            placeholder="PROPTECH_AI_v1"
                             required
                           />
                         </div>
-                        <div className="sketched-underline pb-1">
-                          <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mb-2">02. Concept Subtitle</label>
+                        <div>
+                          <label className="monolith-label">02. Strategic Subtitle</label>
                           <input
                             type="text"
                             value={subtitle}
                             onChange={(e) => setSubtitle(e.target.value)}
-                            className="w-full bg-transparent outline-none text-sm font-medium placeholder:text-outline-variant"
-                            placeholder="Real Estate Due Diligence"
+                            className="monolith-input text-sm"
+                            placeholder="REAL ESTATE DUE DILIGENCE"
                             required
                           />
                         </div>
-                        <div className="sketched-underline pb-1">
-                          <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mb-2">03. The Problem</label>
+                        <div>
+                          <label className="monolith-label">03. The Problem</label>
                           <textarea
                             value={problem}
                             onChange={(e) => setProblem(e.target.value)}
-                            className="w-full bg-transparent outline-none text-sm font-medium h-24 resize-none leading-relaxed placeholder:text-outline-variant italic"
-                            placeholder="What pain point are we addressing?"
+                            className="monolith-input h-24 resize-none leading-tight text-sm"
+                            placeholder="MARKET PAIN POINT"
                             required
                           />
                         </div>
-                        <div className="sketched-underline pb-1">
-                          <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary mb-2">04. The Solution</label>
+                        <div>
+                          <label className="monolith-label">04. The Solution</label>
                           <textarea
                             value={pitch}
                             onChange={(e) => setPitch(e.target.value)}
-                            className="w-full bg-transparent outline-none text-sm font-medium h-24 resize-none leading-relaxed placeholder:text-outline-variant italic"
-                            placeholder="Describe the solution..."
+                            className="monolith-input h-24 resize-none leading-tight text-sm"
+                            placeholder="CONCEPT PITCH"
                             required
                           />
                         </div>
                       </div>
 
-                      <div className="space-y-6">
-                        <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-tertiary">05. Specifications</label>
-                        <div className="max-h-[300px] overflow-y-auto pr-4 space-y-4 custom-scrollbar">
+                      <div className="space-y-8">
+                        <label className="monolith-label">05. Functional Specs</label>
+                        <div className="max-h-[300px] overflow-y-auto pr-2 space-y-4 no-scrollbar">
                           {features.map((feature, index) => (
-                            <div key={index} className="flex gap-3 group items-center">
-                              <div className="sketched-underline flex-1 pb-1">
+                            <div key={index} className="flex gap-4 group items-center">
+                              <div className="flex-1">
                                 <input
                                   type="text"
                                   value={feature}
                                   onChange={(e) => updateFeature(index, e.target.value)}
-                                  className="w-full bg-transparent outline-none text-sm font-medium"
-                                  placeholder="Feature point..."
+                                  className="monolith-input py-3 text-[10px] font-black tracking-[0.2em]"
+                                  placeholder={`SPEC_0${index + 1}`}
                                   required
                                 />
                               </div>
@@ -183,9 +183,9 @@ export default function AdminIdeaForm({
                                 <button
                                   type="button"
                                   onClick={() => removeFeature(index)}
-                                  className="p-1 text-primary/40 hover:text-primary transition-colors"
+                                  className="p-2 text-white/10 hover:text-primary transition-colors"
                                 >
-                                  <X size={16} />
+                                  <X size={20} />
                                 </button>
                               )}
                             </div>
@@ -194,26 +194,26 @@ export default function AdminIdeaForm({
                         <button
                           type="button"
                           onClick={addFeatureField}
-                          className="w-full flex items-center justify-center gap-2 py-3 border border-dashed border-outline-variant rounded-sm text-[10px] font-bold text-tertiary hover:border-primary/50 hover:text-primary transition-all"
+                          className="w-full flex items-center justify-center gap-3 py-4 border-2 border-dashed border-white/5 font-black uppercase tracking-[0.3em] text-[9px] text-white/20 hover:border-primary/50 hover:bg-primary/5 hover:text-white transition-all"
                         >
-                          <Plus size={14} /> Add Specification
+                          <Plus size={16} /> Add Component
                         </button>
                       </div>
                     </div>
 
-                    <div className="flex gap-4 pt-4 border-t border-outline-variant/10">
+                    <div className="flex flex-col md:flex-row gap-6 pt-10 border-t border-white/5">
                       <button
                         type="submit"
-                        className="ink-button flex-1 flex items-center justify-center gap-2 font-bold uppercase text-xs tracking-widest py-4"
+                        className="high-voltage-button flex-1 py-5 text-base"
                       >
-                        Save Concept <ArrowRight size={16} />
+                        Commit Concept <ArrowRight size={20} className="ml-3" />
                       </button>
                       <button
                         type="button"
                         onClick={onClose}
-                        className="ghost-button px-8 font-bold uppercase text-[10px] tracking-widest"
+                        className="secondary-button px-12 py-5 text-base"
                       >
-                        Cancel
+                        Abort
                       </button>
                     </div>
                   </form>

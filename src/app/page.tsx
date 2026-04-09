@@ -3,42 +3,46 @@ import { ArrowRight, FileText, Star, PenTool } from "lucide-react";
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-6 bg-surface relative overflow-hidden">
-      <div className="text-center max-w-3xl z-10">
-        <div className="flex items-center justify-center gap-3 mb-8">
-          <div className="w-12 h-12 bg-primary/5 rounded-sm flex items-center justify-center border border-primary/10">
-            <PenTool className="text-primary" size={24} />
+    <main className="min-h-screen flex flex-col items-center justify-center bg-surface relative overflow-hidden kinetic-texture">
+      {/* Heavy Ambient Background */}
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-primary/10 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute -bottom-1/4 -right-1/4 w-[600px] h-[600px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
+
+      <div className="text-center w-full monolith-container z-10 py-12 md:py-24">
+        <div className="flex items-center justify-center mb-10">
+          <div className="w-16 h-16 bg-primary flex items-center justify-center shadow-[0_10px_20px_rgba(253,228,0,0.15)]">
+            <PenTool className="text-on-primary" size={28} />
           </div>
         </div>
         
-        <h1 className="text-6xl md:text-8xl font-display font-bold tracking-tighter mb-8 text-on-surface uppercase">
-          Idea <span className="text-primary italic">Validator</span>
+        <h1 className="text-display-lg mb-8 text-white italic">
+          Idea <span className="text-primary not-italic">Validator</span>
         </h1>
         
-        <p className="text-xl text-on-surface/70 mb-16 leading-relaxed text-balance font-medium">
-          Get real-time feedback for your startup ideas from industry experts. 
-          The professional protocol for high-fidelity concept validation.
+        <p className="text-lg md:text-2xl text-white/40 mb-16 leading-tight max-w-3xl mx-auto font-black uppercase tracking-[-0.04em]">
+          High-Fidelity Concept Appraisal. <br />
+          <span className="text-white">Real-Time Expert Intelligence Protocol.</span>
         </p>
 
-        <div className="grid md:grid-cols-2 gap-10">
-          <Link href="/admin" className="bg-surface-container-lowest p-10 asymmetric-card border border-outline-variant hover:shadow-xl hover:rotate-1 transition-all group text-left">
-            <div className="w-12 h-12 bg-primary/5 rounded-sm flex items-center justify-center mb-8 border border-primary/10">
+        <div className="grid md:grid-cols-2 gap-8 text-left max-w-5xl mx-auto">
+          <Link href="/admin" className="monolith-card p-10 md:p-12 hover:bg-surface-container-high transition-all group relative overflow-hidden border-l-[8px] border-primary ambient-shadow">
+            <div className="w-12 h-12 bg-surface-container-highest flex items-center justify-center mb-8">
               <FileText className="text-primary" size={24} />
             </div>
-            <h3 className="text-2xl font-display font-bold mb-3 text-on-surface uppercase tracking-tight group-hover:text-primary transition-colors">Admin Portal</h3>
-            <p className="text-on-surface/60 text-sm mb-8 font-medium">Manage your concept inventory and monitor live evaluation feeds.</p>
-            <div className="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-[0.2em]">
-              Enter Dashboard <ArrowRight size={14} />
+            <h3 className="text-3xl md:text-4xl font-display font-black mb-4 text-white uppercase tracking-tighter group-hover:text-primary transition-colors italic leading-none">Admin Portal</h3>
+            <p className="text-white/40 text-[10px] mb-12 font-black uppercase tracking-tight leading-relaxed max-w-xs">Manage your concept inventory and monitor live evaluation feeds with surgical precision.</p>
+            <div className="high-voltage-button w-full">
+              Enter Dashboard <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
 
-          <div className="bg-surface-container p-10 asymmetric-card border border-outline-variant text-left relative overflow-hidden opacity-80 hover:opacity-100 transition-opacity">
-            <div className="w-12 h-12 bg-tertiary/5 rounded-sm flex items-center justify-center mb-8 border border-tertiary/10">
-              <Star className="text-tertiary" size={24} />
+          <div className="monolith-card p-10 md:p-12 opacity-90 hover:opacity-100 transition-opacity border-l-[8px] border-white/10 ambient-shadow">
+            <div className="w-12 h-12 bg-surface-container-highest flex items-center justify-center mb-8">
+              <Star className="text-white/40" size={24} />
             </div>
-            <h3 className="text-2xl font-display font-bold mb-3 text-on-surface uppercase tracking-tight">Expert Review</h3>
-            <p className="text-on-surface/60 text-sm mb-6 font-medium">Experts access their dedicated evaluation suites via unique secure links.</p>
-            <div className="text-[10px] font-mono text-tertiary bg-white/50 p-3 border border-outline-variant/20 tracking-wider">
+            <h3 className="text-3xl md:text-4xl font-display font-black mb-4 text-white uppercase tracking-tighter italic leading-none">Expert Review</h3>
+            <p className="text-white/40 text-[10px] mb-12 font-black uppercase tracking-tight leading-relaxed max-w-xs">Reviewers access their dedicated evaluation suites via unique secure intelligence links.</p>
+            <div className="bg-surface-container-highest p-4 border border-white/5 text-[9px] font-black tracking-[0.4em] text-white/20 uppercase text-center">
               /vote/[expert-identifier]
             </div>
           </div>

@@ -4,81 +4,129 @@
   --font-display: var(--font-display);
   --font-body: var(--font-body);
 
-  --color-surface: #fbf9f4;
-  --color-surface-container-low: #f5f4ed;
-  --color-surface-container: #efeee5;
-  --color-surface-container-lowest: #ffffff;
-  --color-primary: #4d6169;
-  --color-on-surface: #31332c;
-  --color-tertiary: #575e78;
-  --color-outline-variant: rgba(49, 51, 44, 0.15);
+  --color-surface: #0e0e0e;
+  --color-surface-container-low: #131313;
+  --color-surface-container: #191919;
+  --color-surface-container-high: #1f1f1f;
+  --color-surface-container-highest: #262626;
+  
+  --color-primary: #fde400;
+  --color-primary-dim: #edd600;
+  
+  --color-on-surface: #ffffff;
+  --color-on-primary: #655b00;
+  --color-on-primary-container: #5c5200;
+  
+  --color-outline-variant: #484848;
 }
 
 @layer base {
   body {
     @apply bg-surface text-on-surface font-body;
+    -webkit-font-smoothing: antialiased;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display font-bold;
+    @apply font-display font-black uppercase tracking-[-0.05em] leading-[0.85];
+  }
+
+  ::selection {
+    @apply bg-primary text-on-primary;
   }
 }
 
-.paper-grain {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 100;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+/* Typography Overrides: Compact High-Impact */
+.text-display-lg {
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  line-height: 0.85;
+  letter-spacing: -0.06em;
 }
 
-.asymmetric-card {
-  border-top-left-radius: 2px;
-  border-top-right-radius: 4px;
-  border-bottom-left-radius: 1px;
-  border-bottom-right-radius: 3px;
+.text-headline-md {
+  font-size: clamp(1.25rem, 3.5vw, 2.25rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
 }
 
-.sketched-underline {
-  border-bottom: 1px solid var(--color-outline-variant);
-  transition: all 200ms ease-out;
+.text-headline-sm {
+  font-size: 1.1rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
 }
 
-.sketched-underline:focus-within {
-  border-bottom: 2px solid var(--color-primary);
+.monolith-label {
+  @apply block text-[9px] font-black uppercase tracking-[0.3em] text-primary mb-2;
 }
 
-.ink-button {
-  @apply bg-primary text-surface px-6 py-2 rounded-sm transition-all duration-200;
-  box-shadow: 2px 2px 0px rgba(49, 51, 44, 0.1);
+/* Kinetic Monolith Components */
+
+.monolith-card {
+  @apply bg-surface-container border-none rounded-none overflow-hidden transition-all duration-300;
 }
 
-.ink-button:hover {
-  @apply brightness-110;
-  transform: rotate(1deg);
+.monolith-card:hover {
+  @apply bg-surface-container-high;
 }
 
-.ink-button:active {
-  transform: scale(0.98) rotate(0deg);
+.high-voltage-button {
+  @apply relative inline-flex items-center justify-center bg-primary text-on-primary font-display font-black uppercase text-xs tracking-[0.2em] px-8 py-4 rounded-none transition-all duration-300 overflow-hidden border-none;
+  background: linear-gradient(45deg, var(--color-primary), var(--color-primary-dim));
 }
 
-.vellum-drawer {
-  background: rgba(251, 249, 244, 0.8);
-  backdrop-filter: blur(12px);
-  border-left: 1px solid var(--color-outline-variant);
+.high-voltage-button:hover {
+  @apply brightness-110 -translate-y-0.5;
+  box-shadow: 0 10px 20px rgba(253, 228, 0, 0.2);
 }
 
-.ghost-button {
-  @apply border border-outline-variant px-6 py-2 rounded-sm text-primary transition-all duration-200;
+.high-voltage-button:active {
+  @apply translate-y-0 brightness-100 transition-none;
 }
 
-.ghost-button:hover {
-  @apply bg-primary/5;
-  transform: rotate(-1deg);
+.secondary-button {
+  @apply inline-flex items-center justify-center border border-white/10 text-white font-display font-black uppercase text-[10px] tracking-[0.2em] px-8 py-4 rounded-none transition-all duration-300;
+}
+
+.secondary-button:hover {
+  @apply bg-white/5 border-white/30;
+}
+
+.ghost-underline {
+  @apply relative inline-block font-display font-black uppercase text-[9px] tracking-[0.3em] py-1.5;
+}
+
+.ghost-underline::after {
+  content: '';
+  @apply absolute bottom-0 left-0 w-full h-[2px] bg-primary scale-x-0 origin-right transition-transform duration-300;
+}
+
+.ghost-underline:hover::after {
+  @apply scale-x-100 origin-left;
+}
+
+/* Impact Blocks */
+.impact-block {
+  @apply w-full bg-primary py-12 px-8 flex items-center justify-center;
+}
+
+.impact-block h2 {
+  @apply text-on-primary-container m-0;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+}
+
+/* Forms: Industrial Utility */
+.monolith-input {
+  @apply w-full bg-surface-container-highest border-none border-b-2 border-white/5 rounded-none px-4 py-4 text-white font-black uppercase tracking-tighter text-base transition-all duration-300 outline-none placeholder:text-white/10;
+}
+
+.monolith-input:focus {
+  @apply border-primary bg-surface-container-high;
+}
+
+/* Layout Utilities */
+.glass-nav {
+  @apply sticky top-0 z-50 bg-surface/80 backdrop-blur-[40px] border-b border-white/5;
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -90,6 +138,20 @@
   scrollbar-width: none;
 }
 
-.content-fade {
-  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+.ambient-shadow {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.kinetic-texture {
+  background-image: radial-gradient(circle at 1.5px 1.5px, rgba(255,255,255,0.05) 1px, transparent 0);
+  background-size: 16px 16px;
+}
+
+.bleed-imagery {
+  @apply relative w-full overflow-hidden bg-surface-container-low;
+  aspect-ratio: 21/9;
+}
+
+.monolith-container {
+  @apply max-w-[1440px] mx-auto px-6 md:px-12;
 }
