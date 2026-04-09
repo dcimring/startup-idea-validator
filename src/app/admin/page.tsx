@@ -159,27 +159,33 @@ export default function AdminPage() {
 
       {/* Main Content - Live Feed */}
       <section className="flex-1 h-full flex flex-col z-10 min-w-0 bg-[#070707] relative">
-        <header className="h-auto py-6 md:h-24 md:py-0 px-8 md:px-12 flex items-center justify-between gap-6 border-b border-white/5 bg-surface-container/30 backdrop-blur-xl">
-          <div className="flex items-center gap-8">
+        <header className="h-auto py-4 md:h-24 md:py-0 px-4 md:px-12 flex items-center justify-between gap-2 md:gap-6 border-b border-white/5 bg-surface-container/30 backdrop-blur-xl">
+          <div className="flex items-center gap-2 md:gap-8">
             <button 
               onClick={() => setIsSidebarOpen(true)}
-              className="p-3 bg-surface-container-highest border border-white/5 text-primary shadow-lg hover:brightness-110 transition-all"
+              className="p-2 md:p-3 bg-surface-container-highest border border-white/5 text-primary shadow-lg hover:brightness-110 transition-all"
             >
-              <Menu size={28} />
+              <Menu size={20} className="md:w-7 md:h-7" />
             </button>
-            <h2 className="text-2xl md:text-3xl font-display font-black flex items-center gap-4 text-white uppercase tracking-tighter italic">
-              <Activity className="text-primary" size={28} />
-              Command <span className="text-primary not-italic hidden sm:inline text-xl">Center</span>
+            <h2 className="text-xl md:text-3xl font-display font-black flex items-center gap-2 md:gap-4 text-white uppercase tracking-tighter italic">
+              <Activity className="text-primary hidden sm:block" size={28} />
+              Command <span className="text-primary not-italic hidden md:inline text-xl">Center</span>
             </h2>
           </div>
-          <div className="flex items-center gap-6">
+          
+          <div className="flex items-center gap-4 md:gap-12">
+            <div className="hidden sm:block">
+              <StatusOrbs />
+            </div>
             <button
               onClick={() => signOut()}
-              className="hidden sm:flex items-center gap-2 text-white/40 hover:text-white transition-all uppercase font-black text-[9px] tracking-widest border border-white/10 px-4 py-2 hover:bg-white/5"
+              className="group flex items-center gap-4 px-4 py-3 md:px-6 md:py-3.5 border border-white/10 hover:border-white hover:bg-white text-white/40 hover:text-black transition-all duration-300 ease-in-out shrink-0"
             >
-              <LogOut size={12} /> Sign Out
+              <span className="font-black text-[9px] md:text-[10px] tracking-[0.4em] uppercase italic leading-none">
+                Logout
+              </span>
+              <LogOut size={14} className="opacity-20 group-hover:opacity-100 transition-opacity hidden xs:block" />
             </button>
-            <StatusOrbs />
           </div>
         </header>
 
