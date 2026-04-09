@@ -175,7 +175,7 @@ export default function ExpertVotePage() {
                 {/* Column 02: The Core */}
                 <div className="flex flex-col gap-12 min-h-0 md:overflow-y-auto md:no-scrollbar">
                   <div className="space-y-6 bg-surface-container-high p-8 md:p-12 border-l-[12px] border-white/10 ambient-shadow">
-                    <h3 className="monolith-label text-[9px]">01. CONTEXTUAL ANALYSIS</h3>
+                    <h3 className="monolith-label text-[9px]">01. PROBLEM</h3>
                     <div className="text-lg md:text-xl leading-tight text-white/40 font-black uppercase tracking-tighter">
                       {currentIdea.problem}
                     </div>
@@ -254,7 +254,7 @@ export default function ExpertVotePage() {
                     value={reasonsForFailure}
                     onChange={(e) => setReasonsForFailure(e.target.value)}
                     className="monolith-input text-xl md:text-2xl h-40 resize-none"
-                    placeholder="CRITICAL FAILURE POINTS"
+                    placeholder="IF THIS IDEA FAILS WHAT DO YOU THINK THE REASON WOULD BE"
                   />
                 </div>
                 <div>
@@ -263,7 +263,7 @@ export default function ExpertVotePage() {
                     value={existingSolutions}
                     onChange={(e) => setExistingSolutions(e.target.value)}
                     className="monolith-input text-xl md:text-2xl h-40 resize-none"
-                    placeholder="MARKET STATE ANALYSIS"
+                    placeholder="IS THE CURRENT SOLUTION GOOD ENOUGH OR WOULD SOMEONE PAY FOR A CHEAPER / BETTER / FASTER SOLUTION"
                   />
                 </div>
                 <div>
@@ -272,7 +272,7 @@ export default function ExpertVotePage() {
                     value={hiddenHurdles}
                     onChange={(e) => setHiddenHurdles(e.target.value)}
                     className="monolith-input text-xl md:text-2xl h-40 resize-none"
-                    placeholder="UNCOVER HIDDEN HURDLES"
+                    placeholder="IS THERE SOME REGULATORY OR OTHER HURDLE I'M MISSING"
                   />
                 </div>
 
