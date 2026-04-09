@@ -121,8 +121,8 @@ export default function ExpertVotePage() {
               <h1 className="text-display-lg mb-8 text-white italic">
                 Strategic <br /><span className="text-primary not-italic">Appraisal</span>
               </h1>
-              <p className="text-white/40 text-xl md:text-3xl mb-12 leading-tight font-black uppercase tracking-tighter border-l-8 border-primary pl-8 py-4">
-                Welcome <span className="text-white underline decoration-primary underline-offset-8">{formattedExpertName}</span>. <br />
+              <p className="text-white/40 text-xl md:text-3xl mb-12 leading-[1.4] md:leading-[1.3] font-black uppercase tracking-tighter border-l-8 border-primary pl-8 py-4">
+                Welcome <span className="text-white underline decoration-primary underline-offset-[6px]">{formattedExpertName}</span>. <br />
                 Initiate concept validation protocol. <br />
                 Critical intelligence required.
               </p>
