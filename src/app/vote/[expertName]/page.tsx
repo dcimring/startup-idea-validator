@@ -151,7 +151,7 @@ export default function ExpertVotePage() {
                 <div className="flex flex-col gap-10 md:border-r md:border-white/5 md:pr-12">
                   <div className="bg-primary px-6 py-2 shadow-lg self-start">
                     <span className="text-[10px] font-black text-on-primary uppercase tracking-[0.4em]">
-                      PHASE 0{currentIndex + 1} // 0{ideas.length}
+                      IDEA 0{currentIndex + 1} // 0{ideas.length}
                     </span>
                   </div>
                   
@@ -175,7 +175,7 @@ export default function ExpertVotePage() {
                 {/* Column 02: The Core */}
                 <div className="flex flex-col gap-12 min-h-0 md:overflow-y-auto md:no-scrollbar">
                   <div className="space-y-6 bg-surface-container-high p-8 md:p-12 border-l-[12px] border-white/10 ambient-shadow">
-                    <h3 className="monolith-label text-[9px]">01. PROBLEM</h3>
+                    <h3 className="monolith-label text-[9px]">01. PROBLEM STATEMENT</h3>
                     <div className="text-lg md:text-xl leading-tight text-white/40 font-black uppercase tracking-tighter">
                       {currentIdea.problem}
                     </div>
