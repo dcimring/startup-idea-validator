@@ -174,9 +174,9 @@ export default function ExpertVotePage() {
 
                 {/* Column 02: The Core */}
                 <div className="flex flex-col gap-12 min-h-0 md:overflow-y-auto md:no-scrollbar">
-                  <div className="space-y-6">
+                  <div className="space-y-6 bg-surface-container-high p-8 md:p-12 border-l-[12px] border-white/10 ambient-shadow">
                     <h3 className="monolith-label text-[9px]">01. CONTEXTUAL ANALYSIS</h3>
-                    <div className="text-lg md:text-xl leading-tight text-white/40 font-black uppercase tracking-tighter pl-[44px] md:pl-[60px]">
+                    <div className="text-lg md:text-xl leading-tight text-white/40 font-black uppercase tracking-tighter">
                       {currentIdea.problem}
                     </div>
                   </div>
@@ -236,7 +236,7 @@ export default function ExpertVotePage() {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="flex-1 flex flex-col max-w-3xl self-start w-full"
+              className="flex-1 flex flex-col max-w-3xl md:self-center w-full"
             >
               <div className="flex items-center justify-between mb-12">
                 <h2 className="text-5xl md:text-6xl font-display font-black text-white uppercase tracking-tighter italic">
@@ -293,7 +293,7 @@ export default function ExpertVotePage() {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="flex-1 flex flex-col max-w-3xl self-start w-full"
+              className="flex-1 flex flex-col max-w-3xl md:self-center w-full"
             >
               <h2 className="text-5xl md:text-6xl font-display font-black text-white uppercase tracking-tighter italic mb-6">
                 Strategic <span className="text-primary not-italic">Advisory</span>
