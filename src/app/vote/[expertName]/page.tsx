@@ -176,7 +176,7 @@ export default function ExpertVotePage() {
                 <div className="flex flex-col gap-12 min-h-0 md:overflow-y-auto md:no-scrollbar">
                   <div className="space-y-6">
                     <h3 className="monolith-label text-[9px]">01. CONTEXTUAL ANALYSIS</h3>
-                    <div className="text-xl md:text-2xl leading-tight text-white font-black uppercase tracking-tighter">
+                    <div className="text-lg md:text-xl leading-tight text-white/40 font-black uppercase tracking-tighter pl-[44px] md:pl-[60px]">
                       {currentIdea.problem}
                     </div>
                   </div>
