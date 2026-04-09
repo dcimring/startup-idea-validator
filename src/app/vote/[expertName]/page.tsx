@@ -242,7 +242,7 @@ export default function ExpertVotePage() {
                 <h2 className="text-5xl md:text-6xl font-display font-black text-white uppercase tracking-tighter italic">
                   Expert <span className="text-primary not-italic">Critique</span>
                 </h2>
-                <div className={`px-6 py-2 font-black uppercase tracking-[0.4em] text-[10px] shadow-xl ${currentVote ? 'bg-primary text-on-primary' : 'bg-surface-container-highest text-white/20'}`}>
+                <div className={`hidden md:block px-6 py-2 font-black uppercase tracking-[0.5em] text-xs shadow-2xl ${currentVote ? 'bg-primary text-on-primary' : 'bg-surface-container-highest text-white/20'}`}>
                   {currentVote ? 'VALIDATION' : 'EXPOSURE'}
                 </div>
               </div>
