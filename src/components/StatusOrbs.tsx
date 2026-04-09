@@ -27,17 +27,17 @@ export default function StatusOrbs() {
   ];
 
   return (
-    <div className="flex flex-wrap items-center gap-16">
+    <div className="flex items-center gap-2 sm:gap-4 md:gap-8 lg:gap-16">
       {stats.map((stat, i) => (
-        <div key={i} className="flex items-center gap-6">
-          <div className="w-14 h-14 bg-surface-container-highest flex items-center justify-center border-l-4 border-primary shadow-xl">
-            <stat.icon className="text-primary" size={28} />
+        <div key={i} className="flex items-center gap-1 md:gap-6 shrink-0">
+          <div className="w-7 h-7 md:w-14 md:h-14 bg-surface-container-highest flex items-center justify-center border-l-2 md:border-l-4 border-primary shadow-xl shrink-0">
+            <stat.icon className="text-primary md:w-7 md:h-7" size={12} />
           </div>
-          <div>
-            <div className="text-4xl font-display font-black text-white leading-none tracking-[-0.08em] uppercase italic">
+          <div className="flex flex-col">
+            <div className="text-lg md:text-4xl font-display font-black text-white leading-none tracking-[-0.08em] uppercase italic">
               {stat.value}
             </div>
-            <div className="monolith-label text-[8px] mb-0 mt-2 tracking-[0.3em]">
+            <div className="hidden lg:block monolith-label text-[8px] mb-0 mt-2 tracking-[0.3em] whitespace-nowrap">
               {stat.label}
             </div>
           </div>
