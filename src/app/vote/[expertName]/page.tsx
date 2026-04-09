@@ -116,19 +116,19 @@ export default function ExpertVotePage() {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="flex-1 flex flex-col justify-center max-w-3xl"
+              className="flex-1 flex flex-col justify-center items-center text-center max-w-3xl mx-auto"
             >
               <h1 className="text-display-lg mb-8 text-white italic">
                 Strategic <br /><span className="text-primary not-italic">Appraisal</span>
               </h1>
-              <p className="text-white/40 text-xl md:text-3xl mb-12 leading-[1.4] md:leading-[1.3] font-black uppercase tracking-tighter border-l-8 border-primary pl-8 py-4">
+              <p className="text-white/40 text-xl md:text-3xl mb-12 leading-[1.4] md:leading-[1.3] font-black uppercase tracking-tighter border-y-2 border-primary py-8">
                 Welcome <span className="text-white underline decoration-primary underline-offset-[6px]">{formattedExpertName}</span>. <br />
                 Initiate concept validation protocol. <br />
                 Critical intelligence required.
               </p>
               <button
                 onClick={handleStart}
-                className="high-voltage-button self-start px-12 py-6 text-xl"
+                className="high-voltage-button px-12 py-6 text-xl"
               >
                 Initiate Protocol <ArrowRight size={24} className="ml-4" />
               </button>
@@ -339,7 +339,7 @@ export default function ExpertVotePage() {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="flex-1 flex flex-col justify-center max-w-3xl"
+              className="flex-1 flex flex-col justify-center items-center text-center max-w-3xl mx-auto"
             >
               <div className="w-16 h-16 bg-primary flex items-center justify-center mb-10 shadow-xl">
                 <CheckCircle size={36} className="text-on-primary" />
@@ -347,7 +347,7 @@ export default function ExpertVotePage() {
               <h1 className="text-display-lg mb-8 text-white italic">
                 Appraisal <br /><span className="text-primary not-italic">Complete</span>
               </h1>
-              <p className="text-white/40 text-xl md:text-3xl mb-12 leading-tight font-black uppercase tracking-tighter border-l-8 border-primary pl-8 py-4">
+              <p className="text-white/40 text-xl md:text-3xl mb-12 leading-tight font-black uppercase tracking-tighter border-y-2 border-primary py-8">
                 Thank you, <span className="text-white underline decoration-primary underline-offset-8">{formattedExpertName}</span>. <br />
                 Briefing recorded in the central matrix. <br />
                 Founding team notified.
