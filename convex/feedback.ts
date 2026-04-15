@@ -29,7 +29,6 @@ export const submitGeneral = mutation({
 export const listAll = query({
   handler: async (ctx) => {
     const feedback = await ctx.db.query("feedback").order("desc").collect();
-    // Resolve idea titles manually (or use internal joining if preferred, but manual is simple for now)
     const results = await Promise.all(
       feedback.map(async (f) => {
         const idea = await ctx.db.get(f.ideaId);
@@ -40,5 +39,11 @@ export const listAll = query({
       })
     );
     return results;
+  },
+});
+
+export const listGeneral = query({
+  handler: async (ctx) => {
+    return await ctx.db.query("generalFeedback").order("desc").collect();
   },
 });

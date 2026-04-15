@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import AdminIdeaForm from "@/components/AdminIdeaForm";
 import AdminIdeaList from "@/components/AdminIdeaList";
 import RealTimeFeedbackTable from "@/components/RealTimeFeedbackTable";
+import ExpertAdvisoryList from "@/components/ExpertAdvisoryList";
 import StatusOrbs from "@/components/StatusOrbs";
-import { Plus, Database, Activity, FileText, PenTool, X, Menu, LogIn, LogOut, ShieldAlert, Loader2 } from "lucide-react";
+import { Plus, Database, Activity, FileText, PenTool, X, Menu, LogIn, LogOut, ShieldAlert, Loader2, Shield } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuthActions } from "@convex-dev/auth/react";
 import { useQuery } from "convex/react";
@@ -15,6 +16,7 @@ export default function AdminPage() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [editingIdea, setEditingIdea] = useState<any>(null);
+  const [viewMode, setViewMode] = useState<"tactical" | "strategic">("tactical");
   const { signIn, signOut } = useAuthActions();
   const adminStatus = useQuery(api.users.getAdminStatus);
 
@@ -190,15 +192,64 @@ export default function AdminPage() {
         </header>
 
         <div className="flex-1 p-8 md:p-12 overflow-y-auto no-scrollbar">
-          <div className="mb-8 flex items-center justify-between border-l-4 border-primary pl-6 py-1">
+          <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-8 border-l-4 border-primary pl-6 py-1">
             <div>
               <h3 className="monolith-label text-[9px] mb-0.5">
                 Intelligence Stream
               </h3>
-              <p className="text-white font-black uppercase text-base tracking-tighter">Live Evaluation Feed</p>
+              <p className="text-white font-black uppercase text-3xl tracking-tighter italic leading-none">
+                {viewMode === "tactical" ? "Live Evaluation Feed" : "Expert Strategic Advisory"}
+              </p>
+            </div>
+
+            {/* View Mode Toggle */}
+            <div className="flex bg-surface-container-highest/50 p-1 border border-white/5 self-start shrink-0">
+              <button
+                onClick={() => setViewMode("tactical")}
+                className={`flex items-center gap-3 px-6 py-3 font-display font-black text-[10px] tracking-[0.2em] uppercase transition-all ${
+                  viewMode === "tactical" 
+                  ? "bg-primary text-on-primary shadow-xl" 
+                  : "text-white/20 hover:text-white/40"
+                }`}
+              >
+                <Activity size={14} /> Tactical Intel
+              </button>
+              <button
+                onClick={() => setViewMode("strategic")}
+                className={`flex items-center gap-3 px-6 py-3 font-display font-black text-[10px] tracking-[0.2em] uppercase transition-all ${
+                  viewMode === "strategic" 
+                  ? "bg-primary text-on-primary shadow-xl" 
+                  : "text-white/20 hover:text-white/40"
+                }`}
+              >
+                <Shield size={14} /> Strategic Advisory
+              </button>
             </div>
           </div>
-          <RealTimeFeedbackTable />
+          
+          <AnimatePresence mode="wait">
+            {viewMode === "tactical" ? (
+              <motion.div
+                key="tactical"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+              >
+                <RealTimeFeedbackTable />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="strategic"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+              >
+                <ExpertAdvisoryList />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </section>
 
