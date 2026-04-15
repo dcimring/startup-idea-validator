@@ -25,6 +25,25 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Startup Idea Validator | High-Impact",
   description: "Aggressive concept validation.",
+  openGraph: {
+    title: "Startup Idea Validator | High-Impact",
+    description: "Aggressive concept validation.",
+    images: [
+      {
+        url: "/startup-idea-validator.png",
+        width: 1736,
+        height: 788,
+        alt: "Startup Idea Validator",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Startup Idea Validator | High-Impact",
+    description: "Aggressive concept validation.",
+    images: ["/startup-idea-validator.png"],
+  },
 };
 
 export default function RootLayout({
