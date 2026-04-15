@@ -346,6 +346,9 @@ export default function ExpertVotePage() {
                 Thank you, <span className="text-white underline decoration-primary underline-offset-8">{formattedExpertName}</span> <Heart className="inline-block text-red-500 fill-red-500 ml-1 mb-1" size={24} />. <br />
                 Feedback recorded in the central matrix. <br />
               </p>
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/20 mb-12">
+                Feedback tool made with love in <span className="text-white/40">Cayman</span> by <a href="https://danielcimring.com" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-primary underline decoration-primary/30 underline-offset-4 pointer-events-auto">Daniel Cimring</a>
+              </p>
               <div className="h-2 w-32 bg-primary" />
             </motion.div>
           )}

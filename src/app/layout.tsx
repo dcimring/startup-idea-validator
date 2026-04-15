@@ -58,7 +58,7 @@ export default function RootLayout({
       >
         <ConvexClientProvider>
           {children}
-          <footer className="fixed bottom-4 right-6 z-50 pointer-events-none md:pointer-events-auto">
+          <footer className="fixed bottom-4 right-6 z-50 pointer-events-none md:pointer-events-auto hidden md:block">
             <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/20 hover:text-primary transition-colors duration-500">
               Made with love in <span className="text-white/40">Cayman</span> by <a href="https://danielcimring.com" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-primary underline decoration-primary/30 underline-offset-4 pointer-events-auto">Daniel Cimring</a>
             </p>
