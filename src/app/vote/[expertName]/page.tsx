@@ -122,15 +122,16 @@ export default function ExpertVotePage() {
                 Strategic <br /><span className="text-primary not-italic">Appraisal</span>
               </h1>
               <p className="text-white/40 text-xl md:text-3xl mb-12 leading-[1.4] md:leading-[1.3] font-black uppercase tracking-tighter border-y-2 border-primary py-8">
-                Welcome <span className="text-white underline decoration-primary underline-offset-[6px]">{formattedExpertName}</span>. <br />
-                Initiate concept validation protocol. <br />
-                Critical intelligence required.
+                Welcome <span className="text-white underline decoration-primary underline-offset-[6px]">{formattedExpertName}</span> <br />
+                I have <span className="text-white underline decoration-primary underline-offset-[6px]">{ideas.length} ideas</span> for you to review<br />
+                Your feedback is appreciated<br />
+                All fields are optional
               </p>
               <button
                 onClick={handleStart}
                 className="high-voltage-button px-12 py-6 text-xl"
               >
-                Initiate Protocol <ArrowRight size={24} className="ml-4" />
+                Let's Start <ArrowRight size={24} className="ml-4" />
               </button>
             </motion.div>
           )}
@@ -258,7 +259,7 @@ export default function ExpertVotePage() {
                   />
                 </div>
                 <div>
-                  <label className="monolith-label text-[10px]">02. How is the problem solved?</label>
+                  <label className="monolith-label text-[10px]">02. How is the problem solved today?</label>
                   <textarea
                     value={existingSolutions}
                     onChange={(e) => setExistingSolutions(e.target.value)}
@@ -299,7 +300,7 @@ export default function ExpertVotePage() {
                 Strategic <span className="text-primary not-italic">Advisory</span>
               </h2>
               <p className="text-white/20 text-xl md:text-2xl mb-12 font-black uppercase tracking-tight leading-tight max-w-2xl">
-                Beyond the concepts reviewed, do you have any related ideas or general feedback for our venture studio?
+                Beyond the concepts reviewed, do you have any related ideas or general feedback?
               </p>
 
               <div className="space-y-12">
@@ -350,7 +351,6 @@ export default function ExpertVotePage() {
               <p className="text-white/40 text-xl md:text-3xl mb-12 leading-tight font-black uppercase tracking-tighter border-y-2 border-primary py-8">
                 Thank you, <span className="text-white underline decoration-primary underline-offset-8">{formattedExpertName}</span>. <br />
                 Briefing recorded in the central matrix. <br />
-                Founding team notified.
               </p>
               <div className="h-2 w-32 bg-primary" />
             </motion.div>
