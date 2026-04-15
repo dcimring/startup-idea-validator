@@ -127,6 +127,9 @@ export default function ExpertVotePage() {
                 Your feedback is appreciated <Heart className="inline-block text-red-500 fill-red-500 ml-1 mb-1" size={24} />.<br />
                 All fields are optional.
               </p>
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/20 mb-8">
+                Made with love in <span className="text-white/40">Cayman</span> by <a href="https://danielcimring.com" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-primary underline decoration-primary/30 underline-offset-4 pointer-events-auto">Daniel Cimring</a>
+              </p>
               <button
                 onClick={handleStart}
                 className="high-voltage-button px-12 py-6 text-xl"
