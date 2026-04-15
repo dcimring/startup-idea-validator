@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { ThumbsUp, ThumbsDown, CheckCircle, ArrowRight, Loader2, PenTool, Sparkles, MessageCircle, FileText, ChevronRight } from "lucide-react";
+import { ThumbsUp, ThumbsDown, CheckCircle, ArrowRight, Loader2, PenTool, Sparkles, MessageCircle, FileText, ChevronRight, Heart } from "lucide-react";
 
 type Phase = "intro" | "review" | "feedback" | "recommendations" | "closing";
 
@@ -122,10 +122,10 @@ export default function ExpertVotePage() {
                 Strategic <br /><span className="text-primary not-italic">Appraisal</span>
               </h1>
               <p className="text-white/40 text-xl md:text-3xl mb-12 leading-[1.4] md:leading-[1.3] font-black uppercase tracking-tighter border-y-2 border-primary py-8">
-                Welcome <span className="text-white underline decoration-primary underline-offset-[6px]">{formattedExpertName}</span> <br />
-                I have <span className="text-white underline decoration-primary underline-offset-[6px]">{ideas.length} ideas</span> for you to review<br />
-                Your feedback is appreciated<br />
-                All fields are optional
+                Welcome <span className="text-white underline decoration-primary underline-offset-[6px]">{formattedExpertName}</span>. <br />
+                I have <span className="text-white underline decoration-primary underline-offset-[6px]">{ideas.length} ideas</span> for you to review.<br />
+                Your feedback is appreciated <Heart className="inline-block text-red-500 fill-red-500 ml-1 mb-1" size={24} />.<br />
+                All fields are optional.
               </p>
               <button
                 onClick={handleStart}
@@ -281,7 +281,7 @@ export default function ExpertVotePage() {
                   onClick={handleSubmitReview}
                   className="high-voltage-button px-16 py-6 text-xl"
                 >
-                  Submit Briefing <ArrowRight size={24} className="ml-4" />
+                  Submit Feedback <ArrowRight size={24} className="ml-4" />
                 </button>
               </div>
             </motion.div>
@@ -305,29 +305,20 @@ export default function ExpertVotePage() {
 
               <div className="space-y-12">
                 <div>
-                  <label className="monolith-label text-[10px]">Related Concepts</label>
+                  <label className="monolith-label text-[10px]">What Is Your Biggest Pain Point Today?</label>
                   <textarea
                     value={relatedIdeas}
                     onChange={(e) => setRelatedIdeas(e.target.value)}
                     className="monolith-input text-xl md:text-2xl h-40 resize-none"
-                    placeholder="MARKET GAP IDENTIFICATION"
+                    placeholder="IN YOUR DAY TO DAY WORK WHAT IS THE BIGGEST PAIN POINT RIGHT NOW THAT YOU WOULD LOVE TO SOLVE"
                   />
                 </div>
-                <div>
-                  <label className="monolith-label text-[10px]">General Directives</label>
-                  <textarea
-                    value={generalFeedback}
-                    onChange={(e) => setGeneralFeedback(e.target.value)}
-                    className="monolith-input text-xl md:text-2xl h-40 resize-none"
-                    placeholder="TACTICAL ROADMAP FEEDBACK"
-                  />
-                </div>
-
+              
                 <button
                   onClick={handleSubmitRecommendations}
                   className="high-voltage-button px-16 py-6 text-xl"
                 >
-                  Finalize Intelligence Briefing <ArrowRight size={24} className="ml-4" />
+                  Finalize Feedback <ArrowRight size={24} className="ml-4" />
                 </button>
               </div>
             </motion.div>
@@ -349,8 +340,8 @@ export default function ExpertVotePage() {
                 Appraisal <br /><span className="text-primary not-italic">Complete</span>
               </h1>
               <p className="text-white/40 text-xl md:text-3xl mb-12 leading-tight font-black uppercase tracking-tighter border-y-2 border-primary py-8">
-                Thank you, <span className="text-white underline decoration-primary underline-offset-8">{formattedExpertName}</span>. <br />
-                Briefing recorded in the central matrix. <br />
+                Thank you, <span className="text-white underline decoration-primary underline-offset-8">{formattedExpertName}</span> <Heart className="inline-block text-red-500 fill-red-500 ml-1 mb-1" size={24} />. <br />
+                Feedback recorded in the central matrix. <br />
               </p>
               <div className="h-2 w-32 bg-primary" />
             </motion.div>
