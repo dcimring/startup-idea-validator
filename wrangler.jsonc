@@ -1,0 +1,15 @@
+// Serves ideas.danielcimring.com from Cloudflare Workers static assets.
+// `next build` (output: "export") writes the site to out/.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "startup-idea-validator",
+  "compatibility_date": "2026-11-01",
+  "routes": [
+    { "pattern": "ideas.danielcimring.com/*", "zone_name": "danielcimring.com" },
+  ],
+  "assets": {
+    "directory": "./out",
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "404-page",
+  },
+}

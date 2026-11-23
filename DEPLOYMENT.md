@@ -1,6 +1,6 @@
 # Deployment Guide: Startup Idea Validator
 
-This guide outlines the steps to deploy the **Convex** backend and the **Next.js** frontend using the Vercel CLI.
+This guide outlines the steps to deploy the **Convex** backend and the **Next.js** frontend using Cloudflare Workers.
 
 ---
 
@@ -19,33 +19,17 @@ Before deploying the frontend, your backend schema and functions must be live in
 
 ---
 
-## 2. Deploy Frontend (Vercel CLI)
+## 2. Deploy Frontend (Cloudflare Workers)
 
-Ensure you have the Vercel CLI installed (`npm i -g vercel`).
+The frontend is a Next.js static export (`output: "export"` in `next.config.ts`) served by Cloudflare Workers static assets at **https://ideas.danielcimring.com** (`wrangler.jsonc`).
 
-1.  **Authenticate (if not already):**
-    ```bash
-    vercel login
-    ```
+```bash
+npm run deploy
+```
 
-2.  **Initialize & Link Project:**
-    ```bash
-    vercel link
-    ```
-    - Follow the prompts to link to your Vercel account and set a project name (e.g., `startup-idea-validator`).
+This builds with the production Convex URL (`https://keen-grouse-979.convex.cloud`, set inline in the `deploy` script so it overrides `.env.local`), then runs `wrangler deploy`. Run `npx wrangler login` once on a new machine. Pushing to git does not deploy.
 
-3.  **Add Environment Variable:**
-    Vercel needs your production Convex URL to communicate with the backend.
-    ```bash
-    vercel env add NEXT_PUBLIC_CONVEX_URL production
-    ```
-    - When prompted for the value, paste the **Production HTTP API URL** from the Convex deployment step above.
-
-4.  **Final Production Build & Deploy:**
-    ```bash
-    vercel --prod
-    ```
-    - Vercel will build your Next.js app and provide a live production URL (e.g., `https://startup-idea-validator.vercel.app`).
+`/vote/<expert>` URLs all serve one prebuilt page (`/vote/_`) via `public/_redirects`; the page reads the expert name from the browser URL.
 
 ---
 
@@ -77,5 +61,4 @@ If you have test ideas/feedback in your **development** environment that you wan
 | **Local Dev (App)** | `npm run dev` |
 | **Local Dev (Backend)** | `npx convex dev` |
 | **Deploy Backend** | `npx convex deploy` |
-| **Deploy Frontend** | `vercel --prod` |
-| **View Vercel Dashboard** | `vercel dashboard` |
+| **Deploy Frontend** | `npm run deploy` |
